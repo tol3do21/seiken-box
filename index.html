@@ -1067,7 +1067,7 @@
 <div id="rv-panel">
   <div id="rv-ph">
     <span>Notas (<span id="rv-cnt2">0</span>)</span>
-    <button id="rv-export">Copiar</button>
+    <button id="rv-export">Enviar por email</button>
     <button id="rv-clear">Borrar todo</button>
     <button id="rv-cp">✕</button>
   </div>
@@ -1169,11 +1169,11 @@
   mt.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();saveNote()}});
   document.getElementById('rv-export').addEventListener('click',()=>{
     if(!notes.length){alert('No hay notas todavía');return}
-    const body='## Notas de revisión\n\n'+
-      notes.map((n,i)=>`**${i+1}. ${n.section}**\n> ${n.text}`).join('\n\n')+
-      '\n\n---\n*Enviado desde el modo revisión de la web Seiken*';
-    const url=REPO+'?title='+encodeURIComponent('Revisión web — '+new Date().toLocaleDateString('es-BO'))+'&body='+encodeURIComponent(body);
-    window.open(url,'_blank');
+    const subject='Revisión web Seiken — '+new Date().toLocaleDateString('es-BO');
+    const body='Hola,\n\nTe mando mis notas de revisión de la web:\n\n'+
+      notes.map((n,i)=>`${i+1}. [${n.section}]\n${n.text}`).join('\n\n')+
+      '\n\nSaludos';
+    window.location.href='mailto:tol3do21@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   });
   document.getElementById('rv-clear').addEventListener('click',()=>{
     if(!notes.length||!confirm('¿Borrar todas las notas?'))return;

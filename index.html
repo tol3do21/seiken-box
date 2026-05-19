@@ -1095,11 +1095,10 @@ import{getFirestore,collection,addDoc,onSnapshot,deleteDoc,doc,updateDoc,serverT
 const FB={apiKey:"AIzaSyBgw5c8ZUrcXuvFFqrR0s7WO8y6V-nHN0w",authDomain:"revisiones-web.firebaseapp.com",projectId:"revisiones-web",storageBucket:"revisiones-web.firebasestorage.app",messagingSenderId:"675175547724",appId:"1:675175547724:web:52b90b520f24ae038405e9"};
 const COLL='seiken',PIN='1234';
 const SECTIONS={
-  const SECTIONS={
-    'manifiesto':'Manifiesto','servicios':'Servicios',
-    'horarios':'Cronograma / Horarios','galeria':'Galería Inside The Box',
-    'equipo':'Coaches / Equipo','tarifas':'Tarifas / Precios',
-    'contacto':'Ubicación y Contacto'
+  'manifiesto':'Manifiesto','servicios':'Servicios',
+  'horarios':'Cronograma / Horarios','galeria':'Galería Inside The Box',
+  'equipo':'Coaches / Equipo','tarifas':'Tarifas / Precios',
+  'contacto':'Ubicación y Contacto'
 };
 const app=initializeApp(FB),db=getFirestore(app);
 let notes=[],pending=null,active=false,isAdmin=false;

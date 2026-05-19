@@ -312,7 +312,7 @@
   .foot-col a:hover{color:var(--accent)}
   .foot-base{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
 
-  /* ============ RESPONSIVE (light) ============ */
+  /* ============ RESPONSIVE ============ */
   @media (max-width:1024px){
     .hero-grid{grid-template-columns:1fr;gap:32px}
     .services-grid{grid-template-columns:1fr}
@@ -324,6 +324,75 @@
     .grid-row{grid-template-columns:90px repeat(6,1fr)}
     .nav-links{display:none}
     .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    .container{padding:0 16px}
+
+    /* Secciones — padding vertical */
+    .manifesto{padding:56px 0}
+    .services,.coaches,.pricing,.location,.gallery{padding:64px 0}
+    .schedule{padding:64px 0}
+    .final{padding:72px 0}
+    footer{padding:40px 0 20px}
+
+    /* Hero */
+    .hero{padding:36px 0 0}
+    .hero-meta{flex-wrap:wrap;gap:8px}
+    .hero-tag{flex-direction:column;gap:10px}
+    .hero-tag .bar{width:40px;height:3px;align-self:auto}
+    .hero-foot{flex-direction:column;align-items:start;gap:16px}
+    .hero-foot .left{flex-wrap:wrap;gap:12px}
+    .hero-stats .num{font-size:26px}
+    .hero-stats .s{padding:14px 12px}
+
+    /* Manifesto */
+    .manifesto-pillars{grid-template-columns:1fr;gap:16px}
+    .manifesto p{font-size:16px}
+
+    /* Servicios */
+    .services-head{flex-direction:column;align-items:start;gap:12px}
+    .services-head .lede{max-width:100%}
+
+    /* Cronograma — scroll horizontal */
+    .schedule-head{flex-direction:column;align-items:start;gap:14px;margin-bottom:24px}
+    .grid-table{overflow-x:auto;display:block;-webkit-overflow-scrolling:touch}
+    .grid-row{min-width:480px;grid-template-columns:72px repeat(6,1fr)}
+    .grid-row .cell{padding:10px 6px;min-height:52px;font-size:12px}
+    .grid-row.head .cell{font-size:10px}
+    .grid-row .time{font-size:13px}
+    .slot{font-size:9px;padding:3px 5px;letter-spacing:.06em}
+    .schedule-legend{gap:12px;font-size:10px}
+
+    /* Coaches */
+    .coaches-head{flex-direction:column;align-items:start;gap:12px}
+    .coaches-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+
+    /* Tarifas */
+    .pricing-head{flex-direction:column;align-items:start;gap:12px}
+    .pricing-grid{grid-template-columns:1fr}
+    .plan .price .amt{font-size:56px}
+
+    /* Ubicación */
+    .location-info h2{font-size:clamp(36px,11vw,56px)}
+    .info-grid{grid-template-columns:1fr}
+    .info-cell{border-right:0!important;border-bottom:1px solid var(--line)!important}
+    .info-cell:last-child{border-bottom:0!important}
+    .map-wrap{min-height:280px}
+
+    /* Galería */
+    .gallery-head{flex-direction:column;align-items:start;gap:12px}
+    .gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:140px}
+    .g1{grid-column:span 2;grid-row:span 2}
+    .g2,.g3,.g4,.g5,.g6,.g7{grid-column:span 1;grid-row:span 1}
+
+    /* CTA final */
+    .final-side{gap:14px}
+    .final .strip{flex-direction:column;gap:10px;text-align:center}
+
+    /* Footer */
+    .foot-grid{grid-template-columns:1fr}
+    .foot-brand .display{font-size:48px}
+    .foot-base{flex-direction:column;gap:8px;text-align:center}
   }
 </style>
 </head>

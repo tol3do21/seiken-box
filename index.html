@@ -1035,17 +1035,24 @@
 #rv-ph span{flex:1;font-family:"Archivo Black";font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink)}
 #rv-ph button{background:transparent;border:1px solid #333;color:var(--muted);padding:4px 9px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
 #rv-ph button:hover{color:var(--ink);border-color:#555}
-#rv-export{background:var(--accent)!important;color:#0b0b0c!important;border-color:var(--accent)!important}
-#rv-export:hover{opacity:.85}
+#rv-admin-badge{display:none;background:var(--accent);color:#0b0b0c;font-family:"Archivo Black";font-size:9px;letter-spacing:.1em;padding:3px 7px;margin-right:4px}
+.is-admin #rv-admin-badge{display:inline}
 #rv-notes{flex:1;overflow-y:auto;padding:6px 0}
-.rv-ni{display:flex;gap:10px;align-items:start;padding:12px 14px;border-bottom:1px solid #1a1a1c}
+.rv-ni{display:flex;gap:10px;align-items:start;padding:12px 14px;border-bottom:1px solid #1a1a1c;transition:opacity .2s}
+.rv-ni.resolved{opacity:.38}
+.rv-ni.resolved .rv-ni-text{text-decoration:line-through}
+.rv-ni.resolved .rv-ni-num{background:#444}
 .rv-ni-num{width:22px;height:22px;min-width:22px;background:var(--accent);color:#0b0b0c;border-radius:50%;font-family:"Archivo Black";font-size:10px;display:grid;place-items:center}
-.rv-ni-text{font-size:13px;line-height:1.5;color:var(--ink)}
 .rv-ni-body{flex:1;min-width:0}
 .rv-ni-sec{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
-.rv-ni-del{background:transparent;border:none;color:#444;cursor:pointer;font-size:16px;padding:0 2px;line-height:1}
-.rv-ni-del:hover{color:#ff5555}
+.rv-ni-text{font-size:13px;line-height:1.5;color:var(--ink)}
+.rv-ni-actions{display:flex;gap:4px;margin-top:8px}
+.rv-ni-actions button{background:transparent;border:1px solid #333;color:var(--muted);padding:3px 9px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.rv-resolve{color:var(--accent)!important;border-color:var(--accent)!important}
+.rv-resolve:hover{background:var(--accent)!important;color:#0b0b0c!important}
+.rv-del:hover{color:#f55!important;border-color:#f55!important}
 .rv-empty{padding:32px 14px;text-align:center;color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+#rv-hint{padding:10px 14px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#333;border-top:1px solid #1a1a1c;text-align:center}
 #rv-modal{position:fixed;z-index:10000;background:#111113;border:2px solid var(--accent);padding:16px;width:280px;display:none;box-shadow:0 8px 32px rgba(0,0,0,.7)}
 #rv-modal.rv-show{display:block}
 #rv-mn{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
@@ -1055,6 +1062,7 @@
 #rv-mc{background:transparent;border:1px solid #333;color:var(--muted);padding:7px 12px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
 #rv-ms{background:var(--accent);color:#0b0b0c;border:none;padding:7px 14px;font-family:"Archivo Black";font-size:10px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
 .rv-pin{position:absolute;width:24px;height:24px;background:var(--accent);color:#0b0b0c;border-radius:50%;font-family:"Archivo Black";font-size:10px;display:grid;place-items:center;transform:translate(-50%,-50%);box-shadow:0 2px 10px rgba(121,255,0,.45),0 0 0 2px #0b0b0c;z-index:9000;pointer-events:none}
+.rv-pin.resolved{background:#444;box-shadow:0 2px 8px rgba(68,68,68,.3),0 0 0 2px #0b0b0c}
 </style>
 
 <!-- MODO REVISIÓN -->
@@ -1066,12 +1074,11 @@
 <button id="rv-fab"><svg width="10" height="13" viewBox="0 0 10 13" fill="currentColor" aria-hidden="true"><path d="M6 0L0 7h4l-1 6 7-7H6z"/></svg> Revisar</button>
 <div id="rv-panel">
   <div id="rv-ph">
-    <span>Notas (<span id="rv-cnt2">0</span>)</span>
-    <button id="rv-export">Enviar por email</button>
-    <button id="rv-clear">Borrar todo</button>
+    <span><span id="rv-admin-badge">Admin</span>Notas (<span id="rv-cnt2">0</span>)</span>
     <button id="rv-cp">✕</button>
   </div>
   <div id="rv-notes"></div>
+  <div id="rv-hint">Ctrl+Shift+R · acceso admin</div>
 </div>
 <div id="rv-modal">
   <div id="rv-mn">Nota #<span id="rv-mi">1</span> · <span id="rv-msec" style="color:var(--ink);opacity:.6"></span></div>
@@ -1082,116 +1089,117 @@
   </div>
 </div>
 
-<script>
-(function(){
-  const KEY='seiken-rv';
-  const REPO='https://github.com/tol3do21/seiken-box/issues/new';
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import{getFirestore,collection,addDoc,onSnapshot,deleteDoc,doc,updateDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+const FB={apiKey:"AIzaSyBgw5c8ZUrcXuvFFqrR0s7WO8y6V-nHN0w",authDomain:"revisiones-web.firebaseapp.com",projectId:"revisiones-web",storageBucket:"revisiones-web.firebasestorage.app",messagingSenderId:"675175547724",appId:"1:675175547724:web:52b90b520f24ae038405e9"};
+const COLL='seiken',PIN='1234';
+const SECTIONS={
   const SECTIONS={
     'manifiesto':'Manifiesto','servicios':'Servicios',
     'horarios':'Cronograma / Horarios','galeria':'Galería Inside The Box',
     'equipo':'Coaches / Equipo','tarifas':'Tarifas / Precios',
     'contacto':'Ubicación y Contacto'
-  };
-  let notes=JSON.parse(localStorage.getItem(KEY)||'[]');
-  let pending=null,active=false;
-  const fab=document.getElementById('rv-fab');
-  const panel=document.getElementById('rv-panel');
-  const notesList=document.getElementById('rv-notes');
-  const modal=document.getElementById('rv-modal');
-  const mt=document.getElementById('rv-mt');
-  const cnt=document.getElementById('rv-cnt');
-  const cnt2=document.getElementById('rv-cnt2');
+};
+const app=initializeApp(FB),db=getFirestore(app);
+let notes=[],pending=null,active=false,isAdmin=false;
+const fab=document.getElementById('rv-fab');
+const panel=document.getElementById('rv-panel');
+const notesList=document.getElementById('rv-notes');
+const modal=document.getElementById('rv-modal');
+const mt=document.getElementById('rv-mt');
+const cnt=document.getElementById('rv-cnt');
+const cnt2=document.getElementById('rv-cnt2');
 
-  function getSection(cx,cy){
-    let el=document.elementFromPoint(cx,cy);
-    while(el&&el!==document.body){
-      if(el.id&&SECTIONS[el.id])return SECTIONS[el.id];
-      el=el.parentElement;
-    }
-    return'Hero / Inicio';
-  }
+onSnapshot(collection(db,COLL),snap=>{
+  notes=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.timestamp?.seconds||0)-(b.timestamp?.seconds||0));
+  updateCount();
+  if(active)renderPins();
+  if(panel.classList.contains('rv-open'))renderList();
+});
 
-  function on(){active=true;document.body.classList.add('review-active');renderPins();updateCount()}
-  function off(){active=false;document.body.classList.remove('review-active');panel.classList.remove('rv-open');modal.classList.remove('rv-show');pending=null;document.querySelectorAll('.rv-pin').forEach(p=>p.remove())}
-
-  function renderPins(){
-    document.querySelectorAll('.rv-pin').forEach(p=>p.remove());
-    notes.forEach((n,i)=>{
-      const p=document.createElement('div');
-      p.className='rv-pin';p.textContent=i+1;
-      p.style.left=n.x+'px';p.style.top=n.y+'px';
-      p.title=`[${n.section}] ${n.text}`;document.body.appendChild(p);
-    });
-  }
-
-  function updateCount(){cnt.textContent=notes.length;cnt2.textContent=notes.length}
-
-  function openModal(px,py,cx,cy){
-    pending={x:px,y:py,section:getSection(cx,cy)};
-    document.getElementById('rv-mi').textContent=notes.length+1;
-    document.getElementById('rv-msec').textContent=pending.section;
-    mt.value='';
-    modal.style.left=Math.min(cx+16,window.innerWidth-296)+'px';
-    modal.style.top=Math.min(cy+16,window.innerHeight-196)+'px';
-    modal.classList.add('rv-show');
-    requestAnimationFrame(()=>mt.focus());
-  }
-
-  function saveNote(){
-    const t=mt.value.trim();if(!t||!pending)return;
-    notes.push({x:pending.x,y:pending.y,section:pending.section,text:t});
-    localStorage.setItem(KEY,JSON.stringify(notes));
-    modal.classList.remove('rv-show');pending=null;
-    renderPins();updateCount();
-    if(panel.classList.contains('rv-open'))renderList();
-  }
-
-  function renderList(){
-    notesList.innerHTML=notes.length
-      ?notes.map((n,i)=>`<div class="rv-ni"><div class="rv-ni-num">${i+1}</div><div class="rv-ni-body"><div class="rv-ni-sec">${n.section}</div><div class="rv-ni-text">${n.text.replace(/</g,'&lt;')}</div></div><button class="rv-ni-del" data-i="${i}" title="Borrar">✕</button></div>`).join('')
-      :'<div class="rv-empty">Sin notas aún</div>';
-    notesList.querySelectorAll('.rv-ni-del').forEach(b=>b.addEventListener('click',()=>{
-      notes.splice(+b.dataset.i,1);
-      localStorage.setItem(KEY,JSON.stringify(notes));
-      renderPins();updateCount();renderList();
+function getSection(cx,cy){
+  let el=document.elementFromPoint(cx,cy);
+  while(el&&el!==document.body){if(el.id&&SECTIONS[el.id])return SECTIONS[el.id];el=el.parentElement}
+  return'Hero / Inicio';
+}
+function on(){active=true;document.body.classList.add('review-active');renderPins();updateCount()}
+function off(){active=false;document.body.classList.remove('review-active');panel.classList.remove('rv-open');modal.classList.remove('rv-show');pending=null;document.querySelectorAll('.rv-pin').forEach(p=>p.remove())}
+function renderPins(){
+  document.querySelectorAll('.rv-pin').forEach(p=>p.remove());
+  notes.forEach((n,i)=>{
+    if(n.resolved&&!isAdmin)return;
+    const p=document.createElement('div');
+    p.className='rv-pin'+(n.resolved?' resolved':'');
+    p.textContent=i+1;p.style.left=n.x+'px';p.style.top=n.y+'px';
+    p.title='['+n.section+'] '+n.text;document.body.appendChild(p);
+  });
+}
+function updateCount(){cnt.textContent=notes.filter(n=>!n.resolved).length;cnt2.textContent=notes.length}
+function openModal(px,py,cx,cy){
+  pending={x:px,y:py,section:getSection(cx,cy)};
+  document.getElementById('rv-mi').textContent=notes.length+1;
+  document.getElementById('rv-msec').textContent=pending.section;
+  mt.value='';
+  modal.style.left=Math.min(cx+16,window.innerWidth-296)+'px';
+  modal.style.top=Math.min(cy+16,window.innerHeight-196)+'px';
+  modal.classList.add('rv-show');requestAnimationFrame(()=>mt.focus());
+}
+async function saveNote(){
+  const t=mt.value.trim();if(!t||!pending)return;
+  modal.classList.remove('rv-show');const n=pending;pending=null;
+  await addDoc(collection(db,COLL),{x:n.x,y:n.y,section:n.section,text:t,resolved:false,timestamp:serverTimestamp()});
+}
+function renderList(){
+  const visible=isAdmin?notes:notes.filter(n=>!n.resolved);
+  notesList.innerHTML=visible.length
+    ?visible.map((n,i)=>`<div class="rv-ni${n.resolved?' resolved':''}">
+        <div class="rv-ni-num">${i+1}</div>
+        <div class="rv-ni-body">
+          <div class="rv-ni-sec">${n.section}</div>
+          <div class="rv-ni-text">${n.text.replace(/</g,'&lt;')}</div>
+          ${isAdmin?`<div class="rv-ni-actions">
+            <button class="rv-resolve" data-id="${n.id}" data-res="${n.resolved}">${n.resolved?'↩ Reabrir':'✓ Listo'}</button>
+            <button class="rv-del" data-id="${n.id}">✕ Borrar</button>
+          </div>`:''}
+        </div></div>`).join('')
+    :'<div class="rv-empty">Sin notas'+(isAdmin?'':' pendientes')+'</div>';
+  if(isAdmin){
+    notesList.querySelectorAll('.rv-resolve').forEach(b=>b.addEventListener('click',()=>{
+      updateDoc(doc(db,COLL,b.dataset.id),{resolved:b.dataset.res==='true'?false:true});
+    }));
+    notesList.querySelectorAll('.rv-del').forEach(b=>b.addEventListener('click',()=>{
+      if(confirm('¿Borrar esta nota?'))deleteDoc(doc(db,COLL,b.dataset.id));
     }));
   }
+}
+function enterAdmin(){
+  const p=prompt('PIN admin:');
+  if(p===PIN){isAdmin=true;panel.classList.add('is-admin','rv-open');renderPins();renderList();}
+  else if(p!==null)alert('PIN incorrecto');
+}
 
-  fab.addEventListener('click',on);
-  document.getElementById('rv-exit').addEventListener('click',off);
-  document.getElementById('rv-tog').addEventListener('click',()=>{
-    panel.classList.toggle('rv-open');
-    if(panel.classList.contains('rv-open'))renderList();
-  });
-  document.getElementById('rv-cp').addEventListener('click',()=>panel.classList.remove('rv-open'));
-  document.getElementById('rv-mc').addEventListener('click',()=>{modal.classList.remove('rv-show');pending=null});
-  document.getElementById('rv-ms').addEventListener('click',saveNote);
-  mt.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();saveNote()}});
-  document.getElementById('rv-export').addEventListener('click',()=>{
-    if(!notes.length){alert('No hay notas todavía');return}
-    const subject='Revisión web Seiken — '+new Date().toLocaleDateString('es-BO');
-    const body='Hola,\n\nTe mando mis notas de revisión de la web:\n\n'+
-      notes.map((n,i)=>`${i+1}. [${n.section}]\n${n.text}`).join('\n\n')+
-      '\n\nSaludos';
-    window.location.href='mailto:tol3do21@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-  });
-  document.getElementById('rv-clear').addEventListener('click',()=>{
-    if(!notes.length||!confirm('¿Borrar todas las notas?'))return;
-    notes=[];localStorage.removeItem(KEY);
-    renderPins();updateCount();renderList();
-  });
-  document.addEventListener('click',e=>{
-    if(!active)return;
-    if(e.target.closest('#rv-banner,#rv-panel,#rv-modal,#rv-fab,.rv-pin'))return;
-    openModal(e.pageX,e.pageY,e.clientX,e.clientY);
-  });
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){
-      if(modal.classList.contains('rv-show')){modal.classList.remove('rv-show');pending=null}
-      else if(active)off();
-    }
-  });
-})();
+fab.addEventListener('click',on);
+document.getElementById('rv-exit').addEventListener('click',off);
+document.getElementById('rv-tog').addEventListener('click',()=>{
+  panel.classList.toggle('rv-open');if(panel.classList.contains('rv-open'))renderList();
+});
+document.getElementById('rv-cp').addEventListener('click',()=>panel.classList.remove('rv-open'));
+document.getElementById('rv-mc').addEventListener('click',()=>{modal.classList.remove('rv-show');pending=null});
+document.getElementById('rv-ms').addEventListener('click',saveNote);
+mt.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();saveNote()}});
+document.addEventListener('click',e=>{
+  if(!active)return;
+  if(e.target.closest('#rv-banner,#rv-panel,#rv-modal,#rv-fab,.rv-pin'))return;
+  openModal(e.pageX,e.pageY,e.clientX,e.clientY);
+});
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.shiftKey&&e.key==='R'){e.preventDefault();enterAdmin();}
+  if(e.key==='Escape'){
+    if(modal.classList.contains('rv-show')){modal.classList.remove('rv-show');pending=null}
+    else if(active)off();
+  }
+});
 </script>
 
 <script>

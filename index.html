@@ -157,7 +157,7 @@
   /* ============ MANIFIESTO ============ */
   .manifesto{padding:80px 0;border-bottom:1px solid var(--line)}
   .manifesto-grid{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
-  .section-eyebrow{display:flex;align-items:center;gap:12px;color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+  .section-eyebrow{display:flex;align-items:center;gap:12px;color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
   .section-eyebrow .dash{width:24px;height:1px;background:var(--accent)}
   .manifesto h2{font-family:"Archivo Black";font-size:clamp(40px,5vw,72px);line-height:.92;letter-spacing:-.02em;margin-top:24px;text-transform:uppercase}
   .manifesto h2 em{font-style:normal;color:var(--accent)}
@@ -540,9 +540,10 @@
       <div class="svc">
         <div class="svc-num">/01</div>
         <div class="svc-icon">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="10" cy="14" r="4"/><circle cx="22" cy="10" r="4"/><circle cx="34" cy="14" r="4"/>
-            <path d="M6 36 q4 -10 16 -10 t16 10"/>
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="22" x2="10" y2="22"/><line x1="34" y1="22" x2="40" y2="22"/>
+            <rect x="10" y="16" width="8" height="12" rx="1"/><rect x="26" y="16" width="8" height="12" rx="1"/>
+            <line x1="18" y1="22" x2="26" y2="22"/>
           </svg>
         </div>
         <h3>Fitness <span class="accent">grupal</span></h3>
@@ -559,9 +560,10 @@
       <div class="svc">
         <div class="svc-num">/02</div>
         <div class="svc-icon">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="6" y="6" width="32" height="32"/>
-            <path d="M6 22 h32 M22 6 v32"/>
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="12" y="4" width="20" height="28" rx="2"/>
+            <line x1="17" y1="12" x2="27" y2="12"/><line x1="17" y1="18" x2="27" y2="18"/><line x1="17" y1="24" x2="23" y2="24"/>
+            <circle cx="30" cy="36" r="6"/><path d="M27 36 l2 2 4-4"/>
           </svg>
         </div>
         <h3>Tu propio <span class="accent">programa</span></h3>
@@ -578,8 +580,9 @@
       <div class="svc">
         <div class="svc-num">/03</div>
         <div class="svc-icon">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 4 v36"/><path d="M10 14 l12 -10 12 10"/><path d="M6 40 h32"/>
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 6 C14 6 8 13 8 20 c0 10 14 18 14 18 s14-8 14-18 c0-7-6-14-14-14z"/>
+            <circle cx="22" cy="20" r="4"/>
           </svg>
         </div>
         <h3>Nutrición <span class="accent">con Nutrilara</span></h3>
@@ -804,7 +807,7 @@
   <div class="container">
     <div class="coaches-head">
       <div>
-        <div class="section-eyebrow"><span class="dash"></span><span>04 · Equipo</span></div>
+        <div class="section-eyebrow"><span class="dash"></span><span>05 · Equipo</span></div>
         <h2>Los que te<br/>gritan tu nombre.</h2>
       </div>
       <p class="mono" style="color:var(--muted);max-width:32ch">Coaches certificados bajo método Opex. Una sola filosofía: técnica primero, intensidad después, comunidad siempre.</p>
@@ -889,7 +892,7 @@
   <div class="container">
     <div class="pricing-head">
       <div>
-        <div class="section-eyebrow"><span class="dash"></span><span>05 · Tarifas</span></div>
+        <div class="section-eyebrow"><span class="dash"></span><span>06 · Tarifas</span></div>
         <h2>Tu plan.<br/>Sin contrato.</h2>
       </div>
       <p class="mono" style="color:var(--muted);max-width:36ch">Cuatro planes — desde clases grupales hasta programación individualizada. Primera clase siempre gratis.</p>
@@ -961,7 +964,7 @@
   <div class="container">
     <div class="location-grid">
       <div class="location-info">
-        <div class="section-eyebrow"><span class="dash"></span><span>06 · Dónde estamos</span></div>
+        <div class="section-eyebrow"><span class="dash"></span><span>07 · Dónde estamos</span></div>
         <h2>En el corazón<br/>de <span class="city">Sucre</span>.</h2>
         <p style="color:var(--muted);font-size:16px;line-height:1.5;margin-top:24px;max-width:42ch">A pocas cuadras de la Plaza 25 de Mayo. Box techado de entrenamiento funcional, cafetería Nutrilara, vestuarios completos y área de stretching.</p>
         <div class="info-grid">

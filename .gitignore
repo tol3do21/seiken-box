@@ -1,0 +1,12 @@
+# IDE / Agent Settings
+.agents/
+.vscode/
+.idea/
+
+# System files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Backups and previous code
+codigo-previo/

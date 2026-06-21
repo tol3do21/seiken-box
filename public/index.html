@@ -337,6 +337,18 @@
     top:-80px;right:-80px;
     background:radial-gradient(ellipse, rgba(0,204,0,.13) 0%, transparent 70%);
   }
+  .testimonios::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:0;
+    background-image:url('imagen/seiken-box-comunidad.jpg');
+    background-size:cover;
+    background-position:center 30%;
+    opacity:.15;
+    filter:grayscale(100%) contrast(1.1);
+    pointer-events:none;
+  }
   .testimonios .container,.testimonios-grid,.testimonios-head,.testimonios-strip{position:relative;z-index:1}
   .testimonios-head{margin-bottom:56px}
   .testimonios h2{font-family:"Archivo Black";font-size:clamp(36px,4.5vw,64px);line-height:.92;letter-spacing:-.02em;text-transform:uppercase;margin-top:24px}

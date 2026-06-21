@@ -45,16 +45,24 @@ El sitio está desarrollado como una SPA (Single Page Application) estática e i
 
 ---
 
-## 5. Control de Versiones e Integración Continua (GitHub)
+---
+
+## 5. Control de Versiones e Integración Continua (GitHub y Cloudflare)
 - **Repositorio Local:** Inicializado con Git localmente en la carpeta raíz del proyecto.
 - **Archivo `.gitignore`:** Configurado para ignorar la carpeta de backups `codigo-previo/` y los directorios del agente de IA (`.agents/`).
-- **Identidad Git:** Configurado localmente con el usuario `tol3do21`.
-- **Repositorio Remoto:** Vinculado con el repositorio oficial de GitHub: `https://github.com/tol3do21/seiken-box.git`.
-- **Sincronización:** Se realizó un empuje forzado de la versión local a la rama `main` de GitHub, reemplazando la plantilla inicial anterior con la versión optimizada de producción actual. Todos los cambios futuros se guardarán mediante commits y se subirán a GitHub, garantizando un historial de versiones seguro y reversible en cualquier momento.
+- **Sincronización:** Vinculado con el repositorio oficial de GitHub: `https://github.com/tol3do21/seiken-box.git`. Se empujó la versión local a la rama `main`, activando la integración continua y el auto-despliegue en Cloudflare Pages en la URL pública **[https://seiken-box.pages.dev/](https://seiken-box.pages.dev/)**.
+- **Limpieza de Repositorios Viejos:** Se eliminaron definitivamente de GitHub los repositorios obsoletos (`me-gusta-sucre`, `tol3do21.github.io` y `Pagina-Web-Prueba-`) mediante GitHub CLI tras la reautorización del permiso `delete_repo` en la terminal del cliente. La cuenta quedó limpia y solo conserva los proyectos activos de interés.
 
 ---
 
-## 6. Temas Pendientes
-1. **Revisión de Contenidos:** Confirmar si hay cambios en los horarios definitivos o tarifas de los planes de entrenamiento.
-2. **Limpieza de Repositorios Viejos:** Eliminar los repositorios obsoletos de GitHub (`me-gusta-sucre`, `tol3do21.github.io`, `Pagina-Web-Prueba-`) reautorizando el comando en terminal o haciéndolo manualmente desde la interfaz web de GitHub.
+## 6. Mejoras Estéticas de Profundidad (Resuelto hoy)
+- **Glows Radiales Verdes:** Se añadieron efectos de iluminación ambiental verde en las secciones oscuras (*Servicios*, *Horarios* y *Testimonios*) utilizando gradientes radiales y elípticos difusos en pseudoelementos CSS (`::before`/`::after`). Esto aporta dinamismo y elimina la sensación plana del fondo oscuro.
+- **Transición Parallax:** Se incorporó una faja fotográfica entre *Servicios* y *Testimonios* con la imagen real de superación (`seiken-box-esfuerzo-superacion.jpg`). El efecto parallax (`background-attachment: fixed`) crea una sensación de ventana en movimiento sobre pantallas grandes, mejorando drásticamente el impacto estético de la landing page.
+
+---
+
+## 7. Temas Pendientes
+1. **Revisión de Contenidos:** Confirmar si hay cambios o correcciones en la información de horarios o detalles específicos de los entrenamientos.
+2. **Edición manual de marcas de agua:** Limpiar las marcas de agua verdes en las imágenes restantes cuando el cliente disponga de las tomas originales sin edición previa.
+
 

@@ -45,6 +45,16 @@ El sitio está desarrollado como una SPA (Single Page Application) estática e i
 
 ---
 
-## 5. Temas Pendientes
-1. **Validación Visual Responsiva:** Probar el comportamiento de la 'N' y el texto en distintos anchos de ventana (especialmente tablets y laptops pequeñas).
-2. **Revisión de Contenidos:** Confirmar si hay cambios en los horarios definitivos o tarifas de los planes de entrenamiento.
+## 5. Control de Versiones e Integración Continua (GitHub)
+- **Repositorio Local:** Inicializado con Git localmente en la carpeta raíz del proyecto.
+- **Archivo `.gitignore`:** Configurado para ignorar la carpeta de backups `codigo-previo/` y los directorios del agente de IA (`.agents/`).
+- **Identidad Git:** Configurado localmente con el usuario `tol3do21`.
+- **Repositorio Remoto:** Vinculado con el repositorio oficial de GitHub: `https://github.com/tol3do21/seiken-box.git`.
+- **Sincronización:** Se realizó un empuje forzado de la versión local a la rama `main` de GitHub, reemplazando la plantilla inicial anterior con la versión optimizada de producción actual. Todos los cambios futuros se guardarán mediante commits y se subirán a GitHub, garantizando un historial de versiones seguro y reversible en cualquier momento.
+
+---
+
+## 6. Temas Pendientes
+1. **Revisión de Contenidos:** Confirmar si hay cambios en los horarios definitivos o tarifas de los planes de entrenamiento.
+2. **Limpieza de Repositorios Viejos:** Eliminar los repositorios obsoletos de GitHub (`me-gusta-sucre`, `tol3do21.github.io`, `Pagina-Web-Prueba-`) reautorizando el comando en terminal o haciéndolo manualmente desde la interfaz web de GitHub.
+

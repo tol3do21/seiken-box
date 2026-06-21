@@ -301,7 +301,13 @@
   .pricing{padding:120px 0;border-bottom:1px solid var(--line);background:var(--paper);color:var(--paper-ink)}
   .pricing-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:48px}
   .pricing-head h2{font-family:"Archivo Black";font-size:clamp(36px,4.5vw,64px);line-height:.9;letter-spacing:-.02em;text-transform:uppercase}
-  .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(0,0,0,.15)}
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(0,0,0,.15)}
+  .pricing-grid.show-regulares .plan[data-category="especiales"] { display: none; }
+  .pricing-grid.show-especiales .plan[data-category="regulares"] { display: none; }
+  .pricing .pricing-controls { display: flex; gap: 8px; margin-top: 12px; }
+  .pricing .chip { font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; padding:6px 12px; border:1px solid rgba(0,0,0,.15); background:transparent; color:#8a8070; cursor:pointer; transition:all .2s; }
+  .pricing .chip:hover { color: var(--paper-ink); border-color: var(--paper-ink); }
+  .pricing .chip.is-on { color: #0b0b0c; background: var(--accent); border-color: var(--accent); }
   .plan{padding:36px 32px;border-right:1px solid rgba(0,0,0,.15);background:var(--paper);display:flex;flex-direction:column;min-height:520px;position:relative;transition:background .2s}
   .plan:last-child{border-right:0}
   .plan:hover{background:#e8e4da}
@@ -512,9 +518,10 @@
   @media (max-width:1024px){
     .hero-grid{grid-template-columns:1.15fr .85fr;gap:24px}
     .services-grid{grid-template-columns:1fr}
-    .pricing-grid{grid-template-columns:repeat(2,1fr)}
-    .svc,.plan{border-right:0;border-bottom:1px solid var(--line);min-height:auto}
-    .svc:last-child,.plan:last-child{border-bottom:0}
+    .pricing-grid{grid-template-columns:repeat(3,1fr)}
+    .svc{border-right:0;border-bottom:1px solid var(--line);min-height:auto}
+    .plan{min-height:auto}
+    .svc:last-child{border-bottom:0}
     .coaches-grid{grid-template-columns:repeat(3,1fr)}
     .location-grid,.final-grid{grid-template-columns:1fr}
     .grid-row{grid-template-columns:90px repeat(5,1fr)}
@@ -597,6 +604,11 @@
     .foot-grid{grid-template-columns:1fr}
     .foot-brand .display{font-size:48px}
     .foot-base{flex-direction:column;gap:8px;text-align:center}
+  }
+  @media (max-width:768px){
+    .pricing-grid{grid-template-columns:1fr!important}
+    .plan{border-right:0!important;border-bottom:1px solid rgba(0,0,0,.15)!important}
+    .plan:last-child{border-bottom:0!important}
   }
 </style>
 </head>
@@ -955,65 +967,130 @@
           <div class="section-eyebrow"><span class="dash"></span><span>05 · Tarifas</span></div>
           <h2>Elige tu<br/><em>plan.</em></h2>
         </div>
-        <p style="color:#6b6459;font-size:15px;line-height:1.6;max-width:36ch">Cuatro planes — desde clases grupales hasta programación individualizada. Primera clase siempre gratis.</p>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;text-align:right">
+          <p style="color:#6b6459;font-size:15px;line-height:1.6;max-width:36ch">Planes flexibles adaptados a tus objetivos. Primera clase de prueba siempre gratis.</p>
+          <div class="pricing-controls">
+            <button class="chip is-on" data-pricing-category="regulares">Planes Regulares</button>
+            <button class="chip" data-pricing-category="especiales">Programas Especiales</button>
+          </div>
+        </div>
       </div>
 
-      <div class="pricing-grid">
-        <div class="plan">
+      <div class="pricing-grid show-regulares">
+        <!-- PLAN MENSUAL -->
+        <div class="plan" data-category="regulares">
           <div class="plan-tag">Plan A · Mensual</div>
           <h3>Mensual</h3>
-          <div class="price"><span class="curr">Bs.</span><span class="amt" style="font-size:40px;line-height:1.2">A consultar</span></div>
-          <p>Clases grupales ilimitadas durante un mes. Flexibilidad total para probar el método y la comunidad.</p>
+          <div class="price">
+            <span class="curr">Bs.</span>
+            <span class="amt">280</span>
+            <span class="per">/mes</span>
+          </div>
+          <p>Acceso ilimitado a nuestras clases grupales durante un mes. Ideal para comenzar a entrenar sin compromisos a largo plazo.</p>
           <ul>
             <li>Clases grupales ilimitadas</li>
-            <li>Coach en cada sesión</li>
-            <li>Acceso al box 6 días/semana</li>
-            <li>Primera clase gratis</li>
+            <li>Coach certificado guiando cada sesión</li>
+            <li>Reserva de clases mediante aplicación</li>
+            <li>Acceso a la comunidad Seiken</li>
           </ul>
-          <a class="cta ghost" href="#contacto">Empezar</a>
+          <a class="cta ghost" href="#contacto">Empezar mensual</a>
         </div>
 
-        <div class="plan featured">
-          <span class="badge">Más elegido</span>
+        <!-- PLAN TRIMESTRAL (DESTACADO) -->
+        <div class="plan featured" data-category="regulares">
+          <span class="badge">Recomendado</span>
           <div class="plan-tag">Plan B · Trimestral</div>
           <h3>Trimestral</h3>
-          <div class="price"><span class="curr">Bs.</span><span class="amt" style="font-size:40px;line-height:1.2">A consultar</span></div>
-          <p>Tres meses de clases grupales con descuento. El tiempo justo para ver resultados reales y consolidar el hábito.</p>
+          <div class="price">
+            <span class="curr">Bs.</span>
+            <span class="amt">760</span>
+            <span class="per">/trimestre</span>
+          </div>
+          <p>Tres meses de entrenamiento regular. El tiempo ideal para consolidar la técnica, crear el hábito y ver cambios físicos notables.</p>
           <ul>
             <li>Clases grupales ilimitadas</li>
-            <li>Descuento respecto al mensual</li>
-            <li>Evaluación al inicio y al cierre</li>
-            <li>Descuento en Nutrilara</li>
+            <li>Descuento equivalente por mes</li>
+            <li>Evaluación física inicial y de seguimiento</li>
+            <li>Beneficios de descuento con Nutrilara</li>
           </ul>
-          <a class="cta" href="#contacto">Empezar</a>
+          <a class="cta" href="#contacto">Empezar trimestral</a>
         </div>
 
-        <div class="plan">
+        <!-- PLAN SEMESTRAL -->
+        <div class="plan" data-category="regulares">
           <div class="plan-tag">Plan C · Semestral</div>
           <h3>Semestral</h3>
-          <div class="price"><span class="curr">Bs.</span><span class="amt" style="font-size:40px;line-height:1.2">A consultar</span></div>
-          <p>Seis meses al mejor precio. Para los que ya decidieron y quieren comprometerse con su evolución.</p>
+          <div class="price">
+            <span class="curr">Bs.</span>
+            <span class="amt">1380</span>
+            <span class="per">/semestre</span>
+          </div>
+          <p>Seis meses de compromiso total con tu salud y rendimiento. Nuestra opción con el mayor ahorro mensual disponible.</p>
           <ul>
             <li>Clases grupales ilimitadas</li>
-            <li>Mayor descuento disponible</li>
-            <li>Evaluaciones periódicas</li>
-            <li>Acceso total al box</li>
+            <li>Máximo descuento garantizado</li>
+            <li>Evaluaciones de rendimiento periódicas</li>
+            <li>Prioridad en talleres y eventos especiales</li>
           </ul>
-          <a class="cta ghost" href="#contacto">Consultar precio</a>
+          <a class="cta ghost" href="#contacto">Empezar semestral</a>
         </div>
 
-        <div class="plan">
+        <!-- PLAN SEIKEN YOUTH (ESPECIAL) -->
+        <div class="plan" data-category="especiales">
+          <div class="plan-tag">Especial · Menores 18</div>
+          <h3>Seiken Youth</h3>
+          <div class="price">
+            <span class="curr">Bs.</span>
+            <span class="amt">245</span>
+            <span class="per">/mes</span>
+          </div>
+          <p>Plan exclusivo para menores de 18 años. Fomentamos el deporte, la fuerza y el movimiento saludable en una etapa clave del desarrollo.</p>
+          <ul>
+            <li>Clases grupales ilimitadas</li>
+            <li>Enfoque en técnica y desarrollo seguro</li>
+            <li>Supervisión constante de coaches calificados</li>
+            <li>Tarifa subvencionada especial</li>
+          </ul>
+          <a class="cta ghost" href="#contacto">Inscribir menor</a>
+        </div>
+
+        <!-- PLAN UNIVERSITARIO (ESPECIAL) -->
+        <div class="plan featured" data-category="especiales">
+          <span class="badge">10% Descuento</span>
+          <div class="plan-tag">Especial · Estudiantes</div>
+          <h3>Universitario</h3>
+          <div class="price">
+            <span class="curr">Bs.</span>
+            <span class="amt">252</span>
+            <span class="per">/mes</span>
+          </div>
+          <p>Beneficio exclusivo para estudiantes universitarios vigentes. Mantente activo y libera el estrés de los estudios al mejor precio.</p>
+          <ul>
+            <li>Clases grupales ilimitadas</li>
+            <li>10% de descuento directo incluido</li>
+            <li>Flexibilidad horaria total</li>
+            <li>Presentar credencial vigente al ingresar</li>
+          </ul>
+          <a class="cta" href="#contacto">Obtener descuento</a>
+        </div>
+
+        <!-- PLAN PERSONALIZADO (ESPECIAL) -->
+        <div class="plan" data-category="especiales">
           <div class="plan-tag">Plan D · Individual</div>
           <h3>Personalizado</h3>
-          <div class="price"><span class="curr">Bs.</span><span class="amt" style="font-size:40px;line-height:1.2">A consultar</span></div>
-          <p>Programación 100% individualizada bajo el <strong style="color:var(--ink)">método Opex</strong>. Tu coach evalúa, diseña tu plan semanal y te acompaña en cada sesión.</p>
+          <div class="price">
+            <span class="curr">Bs.</span>
+            <span class="amt">720</span>
+            <span class="per">/mes</span>
+          </div>
+          <p>Programación 100% individualizada bajo el <strong style="color:var(--ink)">método Opex</strong>. Tu coach evalúa, diseña tu plan semanal y te acompaña en el box.</p>
           <ul>
-            <li>Plan semanal a tu medida</li>
-            <li>Incluye clases grupales</li>
-            <li>Seguimiento y ajuste continuo</li>
-            <li>Evaluación de rendimiento</li>
+            <li>Plan de entrenamiento a tu medida</li>
+            <li>Evaluaciones de movilidad y fuerza</li>
+            <li>Seguimiento y ajuste continuo de cargas</li>
+            <li>Incluye acceso a clases grupales</li>
           </ul>
-          <a class="cta ghost" href="#contacto">Consultar</a>
+          <a class="cta ghost" href="#contacto">Solicitar Opex</a>
         </div>
       </div>
     </div>
@@ -1511,6 +1588,23 @@ if (isReviewActive) {
 </script>
 
 <script>
+  // Tarifas toggle (Regulares / Especiales)
+  document.querySelectorAll('[data-pricing-category]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('[data-pricing-category]').forEach(x=>x.classList.remove('is-on'));
+      b.classList.add('is-on');
+      const cat=b.dataset.pricingCategory;
+      const grid=document.querySelector('.pricing-grid');
+      if (cat === 'regulares') {
+        grid.classList.remove('show-especiales');
+        grid.classList.add('show-regulares');
+      } else {
+        grid.classList.remove('show-regulares');
+        grid.classList.add('show-especiales');
+      }
+    });
+  });
+
   // Mañana / Tarde toggle
   document.querySelectorAll('.schedule-controls .chip').forEach(b=>{
     b.addEventListener('click',()=>{

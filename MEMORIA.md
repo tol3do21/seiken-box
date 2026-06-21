@@ -57,7 +57,7 @@ El sitio está desarrollado como una SPA (Single Page Application) estática e i
 
 ## 6. Mejoras Estéticas de Profundidad (Resuelto hoy)
 - **Glows Radiales Verdes:** Se añadieron efectos de iluminación ambiental verde en las secciones oscuras (*Servicios*, *Horarios* y *Testimonios*) utilizando gradientes radiales y elípticos difusos en pseudoelementos CSS (`::before`/`::after`). Esto aporta dinamismo y elimina la sensación plana del fondo oscuro.
-- **Transición Parallax:** Se incorporó una faja fotográfica entre *Servicios* y *Testimonios* con la imagen real de superación (`seiken-box-esfuerzo-superacion.jpg`). El efecto parallax (`background-attachment: fixed`) crea una sensación de ventana en movimiento sobre pantallas grandes, mejorando drásticamente el impacto estético de la landing page.
+- **Imagen de Fondo en Servicios con Glassmorphism:** Se reubicó la foto de superación (`seiken-box-esfuerzo-superacion.jpg`) al fondo completo de la sección de *Servicios* (Qué ofrecemos). Se combinó con una máscara de degradado oscuro (`linear-gradient`) para salvaguardar la legibilidad y se aplicó un efecto de *glassmorphism* (translúcido con desenfoque `backdrop-filter`) a las tres tarjetas de servicios (`.svc`). Esto logra un diseño moderno e interactivo donde la foto del atleta es visible sutilmente de fondo al pasar el cursor (hover translateY). La faja parallax intermedia inicial fue eliminada por completo.
 
 ---
 

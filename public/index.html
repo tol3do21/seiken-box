@@ -197,6 +197,84 @@
   .manifesto-sig{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 
   /* ============ SERVICIOS ============ */
+  /* ============ AMBIENT GLOW / DEPTH EFFECTS ============ */
+  .glow-section{position:relative;overflow:hidden}
+  .glow-section::before{
+    content:"";
+    position:absolute;
+    pointer-events:none;
+    z-index:0;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.55;
+  }
+  .glow-section > .container{position:relative;z-index:1}
+  /* Glow verde — izquierda superior */
+  .glow-tl::before{
+    width:600px;height:600px;
+    top:-180px;left:-120px;
+    background:radial-gradient(circle, rgba(0,204,0,.14) 0%, transparent 70%);
+  }
+  /* Glow verde — derecha inferior */
+  .glow-br::after{
+    content:"";
+    position:absolute;
+    pointer-events:none;
+    z-index:0;
+    border-radius:50%;
+    filter:blur(140px);
+    opacity:.45;
+    width:500px;height:500px;
+    bottom:-160px;right:-100px;
+    background:radial-gradient(circle, rgba(0,204,0,.12) 0%, transparent 70%);
+  }
+  /* Faja parallax */
+  .parallax-band{
+    position:relative;
+    height:380px;
+    background-image:url('imagen/seiken-box-esfuerzo-superacion.jpg');
+    background-size:cover;
+    background-position:center 35%;
+    background-attachment:fixed;
+    overflow:hidden;
+  }
+  .parallax-band::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(11,11,12,.85) 0%, rgba(11,11,12,.45) 50%, rgba(11,11,12,.85) 100%);
+    z-index:1;
+  }
+  .parallax-band-inner{
+    position:relative;
+    z-index:2;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    text-align:center;
+  }
+  .parallax-band-eyebrow{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .parallax-band-title{
+    font-family:"Archivo Black";
+    font-size:clamp(28px,4vw,52px);
+    letter-spacing:-.02em;
+    text-transform:uppercase;
+    color:var(--ink);
+    line-height:.92;
+  }
+  @media(max-width:640px){
+    .parallax-band{background-attachment:scroll;height:280px}
+  }
+
   .services{padding:120px 0;border-bottom:1px solid var(--line);background:#17171b}
   .services-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:48px;gap:32px}
   .services-head h2{font-family:"Archivo Black";font-size:clamp(36px,4.5vw,64px);line-height:.9;letter-spacing:-.02em;text-transform:uppercase}
@@ -217,7 +295,21 @@
   .svc .more{margin-top:24px;display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);align-self:flex-start;padding-bottom:6px;border-bottom:1px solid var(--accent)}
 
   /* ============ HORARIOS ============ */
-  .schedule{padding:120px 0;border-bottom:1px solid var(--line);background:#17171b;color:var(--ink)}
+  .schedule{padding:120px 0;border-bottom:1px solid var(--line);background:#17171b;color:var(--ink);position:relative;overflow:hidden}
+  .schedule::after{
+    content:"";
+    position:absolute;
+    pointer-events:none;
+    z-index:0;
+    border-radius:50%;
+    filter:blur(160px);
+    opacity:.35;
+    width:700px;height:700px;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(0,204,0,.10) 0%, transparent 70%);
+  }
+  .schedule .container{position:relative;z-index:1}
   .schedule .section-eyebrow{color:#5a5447}
   .schedule .section-eyebrow .dash{background:var(--accent)}
   .schedule-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:40px;gap:32px}
@@ -272,7 +364,20 @@
   .coach-tags span{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(0,0,0,.2);padding:4px 7px;color:#5a5447}
 
   /* ============ TESTIMONIOS ============ */
-  .testimonios{padding:120px 0;border-bottom:1px solid var(--line);background:#070708}
+  .testimonios{padding:120px 0;border-bottom:1px solid var(--line);background:#070708;position:relative;overflow:hidden}
+  .testimonios::before{
+    content:"";
+    position:absolute;
+    pointer-events:none;
+    z-index:0;
+    border-radius:50%;
+    filter:blur(130px);
+    opacity:.5;
+    width:580px;height:400px;
+    top:-80px;right:-80px;
+    background:radial-gradient(ellipse, rgba(0,204,0,.13) 0%, transparent 70%);
+  }
+  .testimonios .container,.testimonios-grid,.testimonios-head,.testimonios-strip{position:relative;z-index:1}
   .testimonios-head{margin-bottom:56px}
   .testimonios h2{font-family:"Archivo Black";font-size:clamp(36px,4.5vw,64px);line-height:.92;letter-spacing:-.02em;text-transform:uppercase;margin-top:24px}
   .testimonios h2 em{font-style:normal;color:var(--accent)}
@@ -743,7 +848,7 @@
   </section>
 
   <!-- SERVICIOS -->
-  <section class="services" id="servicios">
+  <section class="services glow-section glow-tl glow-br" id="servicios">
     <div class="container">
       <div class="services-head">
         <div>
@@ -900,6 +1005,14 @@
       </div>
     </div>
   </section>
+
+  <!-- PARALLAX BAND -->
+  <div class="parallax-band">
+    <div class="parallax-band-inner">
+      <span class="parallax-band-eyebrow">Seiken Training Box · Sucre, Bolivia</span>
+      <div class="parallax-band-title">El esfuerzo<br/>no miente.</div>
+    </div>
+  </div>
 
   <!-- TESTIMONIOS -->
   <section class="testimonios" id="testimonios">

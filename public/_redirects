@@ -1,0 +1,9 @@
+# Reglas de enrutamiento para Cloudflare Pages
+# Excluir rutas del CMS del SPA fallback
+
+# 1. Forzar que /admin sirva su propio index.html
+/admin        /admin/index.html    200
+/admin/       /admin/index.html    200
+
+# 2. SPA fallback para el resto de rutas (excepto archivos estáticos)
+/*            /index.html          200

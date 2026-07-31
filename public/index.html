@@ -1175,6 +1175,132 @@
       });
     });
   </script>
+
+  <!-- ====================================================
+       MODAL POP-UP PROMOCIONAL — Gestionado por Decap CMS
+       ===================================================== -->
+  <div id="promo-modal" role="dialog" aria-modal="true" aria-label="Promoción especial Seiken Box" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity 0.35s ease">
+    <div id="promo-modal-card" style="position:relative;width:100%;max-width:480px;background:#141414;border:1px solid rgba(0,204,0,0.30);border-radius:18px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);transform:scale(0.92);transition:transform 0.35s cubic-bezier(.34,1.56,.64,1)">
+
+      <!-- Botón de cierre -->
+      <button id="promo-close-btn" aria-label="Cerrar promoción" style="position:absolute;top:12px;right:12px;z-index:10;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.12);color:#fff;cursor:pointer;transition:background 0.2s,color 0.2s">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <!-- Imagen del Flyer -->
+      <div style="width:100%;background:#000;line-height:0;max-height:72vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
+        <img id="promo-img" src="" alt="Promoción Seiken Box" style="width:100%;height:auto;object-fit:contain;max-height:72vh;display:block" loading="lazy" />
+      </div>
+
+      <!-- Footer con CTA -->
+      <div style="padding:14px 18px;background:#181818;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:0.04em;white-space:nowrap">
+          <span style="width:8px;height:8px;border-radius:50%;background:#00cc00;display:inline-block;animation:pulse 2s infinite"></span>
+          Promo activa
+        </div>
+        <a id="promo-cta-btn" href="https://wa.me/59169680009" target="_blank" rel="noopener" class="cta" style="flex-shrink:0;padding:10px 20px;font-size:13px">
+          <span id="promo-cta-text">Reclamar Promo por WhatsApp</span> <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCRIPT: DECAP CMS — Carga Pop-up por Fechas + WOD Dinámico
+       ============================================================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      /* ---- 1. POP-UP PROMOCIONAL CON CONTROL DE FECHAS Y SESIÓN ---- */
+      fetch('content/promo.json')
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) {
+          if (!data || !data.activo) return;
+
+          // No volver a mostrar si el usuario ya lo cerró en esta sesión
+          if (sessionStorage.getItem('seiken_promo_closed') === 'true') return;
+
+          var now = new Date();
+          var fechaInicio = data.fecha_inicio ? new Date(data.fecha_inicio) : null;
+          var fechaFin    = data.fecha_fin    ? new Date(data.fecha_fin)    : null;
+
+          if (fechaInicio && now < fechaInicio) return;
+          if (fechaFin    && now > fechaFin)    return;
+          if (!data.imagen_flyer)               return;
+
+          var modal     = document.getElementById('promo-modal');
+          var card      = document.getElementById('promo-modal-card');
+          var promoImg  = document.getElementById('promo-img');
+          var ctaBtn    = document.getElementById('promo-cta-btn');
+          var ctaText   = document.getElementById('promo-cta-text');
+
+          promoImg.src  = data.imagen_flyer;
+          promoImg.alt  = data.titulo_alt || 'Promoción Seiken Box';
+          if (ctaBtn  && data.link_whatsapp) ctaBtn.href          = data.link_whatsapp;
+          if (ctaText && data.boton_texto)   ctaText.textContent  = data.boton_texto;
+
+          // Mostrar modal con animación suave (800ms de retraso)
+          modal.style.display = 'flex';
+          setTimeout(function () {
+            modal.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          }, 800);
+
+          // Función cierre
+          function closeModal() {
+            modal.style.opacity = '0';
+            card.style.transform = 'scale(0.92)';
+            sessionStorage.setItem('seiken_promo_closed', 'true');
+            setTimeout(function () { modal.style.display = 'none'; }, 350);
+          }
+
+          document.getElementById('promo-close-btn').addEventListener('click', closeModal);
+          modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
+          });
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeModal();
+          });
+        })
+        .catch(function (err) { console.log('Sin promoción activa:', err); });
+
+      /* ---- 2. WOD DINÁMICO — Sincronización desde wod.json ---- */
+      fetch('content/wod.json')
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (wodData) {
+          if (!wodData) return;
+
+          var dateEl = document.querySelector('.wod-date');
+          var timeEl = document.querySelector('.wod-time');
+          var gridEl = document.querySelector('.wod-grid');
+
+          if (dateEl && wodData.fecha_label) dateEl.textContent = wodData.fecha_label;
+          if (timeEl && wodData.fecha_sub)   timeEl.textContent = wodData.fecha_sub;
+
+          if (gridEl && Array.isArray(wodData.bloques)) {
+            gridEl.innerHTML = wodData.bloques.map(function (b) {
+              var cls  = b.tipo === 'main' ? 'wod-block wod-block-main'
+                       : b.tipo === 'accent' ? 'wod-block wod-block-accent'
+                       : 'wod-block';
+              var titleHtml = b.titulo ? '<div class="wod-movement">' + b.titulo + '</div>' : '';
+              var rxHtml    = b.rx_note ? '<div class="wod-rx mono">' + b.rx_note + '</div>' : '';
+              var itemsHtml = (b.items || []).map(function (i) {
+                return '<li>' + i + '</li>';
+              }).join('');
+              return '<div class="' + cls + '">'
+                   + '<div class="wod-block-tag">' + (b.tag || '') + '</div>'
+                   + titleHtml
+                   + '<ul class="wod-list">' + itemsHtml + '</ul>'
+                   + rxHtml
+                   + '</div>';
+            }).join('');
+          }
+        })
+        .catch(function (err) { console.log('Usando WOD estático por defecto:', err); });
+    });
+  </script>
+
 </body>
 
 </html>

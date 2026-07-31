@@ -1,0 +1,9 @@
+{
+  "activo": true,
+  "titulo_alt": "Promoción Especial Seiken Box",
+  "imagen_flyer": "imagen/seiken-box-comunidad.jpg",
+  "fecha_inicio": "2026-01-01T00:00:00",
+  "fecha_fin": "2026-12-31T23:59:59",
+  "link_whatsapp": "https://wa.me/59169680009?text=Hola!%20Quiero%20mas%20informacion%20sobre%20la%20promocion",
+  "boton_texto": "Reclamar Promo por WhatsApp"
+}

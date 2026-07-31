@@ -1,0 +1,36 @@
+{
+  "categoria": "WOD del Sábado",
+  "fecha_label": "Sáb 21 Jun",
+  "fecha_sub": "08:30 · 09:30 · 10:30",
+  "bloques": [
+    {
+      "tag": "Calentamiento · 10 min",
+      "tipo": "normal",
+      "titulo": "",
+      "items": [
+        "800m trote suave",
+        "2 rondas: 10 sentadillas, 10 inchworms, 10 shoulder pass-throughs"
+      ]
+    },
+    {
+      "tag": "Fuerza · 20 min",
+      "tipo": "main",
+      "titulo": "Back Squat",
+      "items": [
+        "5 × 5 al 75–80% del 1RM",
+        "Descanso 2–3 min entre series"
+      ]
+    },
+    {
+      "tag": "WOD · AMRAP 15 min",
+      "tipo": "accent",
+      "titulo": "For Time",
+      "items": [
+        "21 · 15 · 9",
+        "Thrusters (42.5 / 30 kg)",
+        "Pull-ups"
+      ],
+      "rx_note": "RX · Scaled disponible"
+    }
+  ]
+}

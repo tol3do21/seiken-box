@@ -1,6 +1,10 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: tol3do21/seiken-box
   branch: main
+  # base_url apunta al Cloudflare Worker de autenticación OAuth gratuito.
+  # REEMPLAZA "YOUR_WORKER" con el nombre real del Worker después de desplegarlo.
+  base_url: https://sveltia-cms-auth.YOUR_WORKER.workers.dev
 
 # Cloudflare Pages: la raíz del sitio es /public
 # Las rutas de media_folder son relativas a la raíz del repositorio

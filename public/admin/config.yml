@@ -13,36 +13,42 @@ public_folder: "/imagen/promos"
 collections:
   - name: "promo"
     label: "🎉 Pop-up Promocional"
-    file: "public/content/promo.json"
     description: "Configura la imagen del flyer, las fechas de activación y el enlace de WhatsApp del pop-up promocional."
-    fields:
-      - { label: "¿Mostrar Pop-up?", name: "activo", widget: "boolean", default: true, hint: "Activa o desactiva el pop-up manualmente en cualquier momento." }
-      - { label: "Flyer Promocional (Imagen)", name: "imagen_flyer", widget: "image", required: true, hint: "Sube la imagen/flyer de la promoción (JPG o PNG)." }
-      - { label: "Descripción de la imagen (alt)", name: "titulo_alt", widget: "string", default: "Promoción Seiken Box", hint: "Texto descriptivo de la imagen (importante para accesibilidad)." }
-      - { label: "📅 Fecha y hora de INICIO", name: "fecha_inicio", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "DD/MM/YYYY", time_format: "HH:mm", hint: "El pop-up se activará automáticamente a partir de esta fecha y hora." }
-      - { label: "📅 Fecha y hora de FIN", name: "fecha_fin", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "DD/MM/YYYY", time_format: "HH:mm", hint: "El pop-up se ocultará automáticamente después de esta fecha y hora." }
-      - { label: "Enlace de WhatsApp (Botón)", name: "link_whatsapp", widget: "string", default: "https://wa.me/59169680009?text=Hola!%20Quiero%20informacion%20de%20la%20promo", hint: "URL completa de WhatsApp con mensaje predefinido." }
-      - { label: "Texto del Botón", name: "boton_texto", widget: "string", default: "Reclamar Promo por WhatsApp", hint: "Texto que aparece en el botón de llamada a la acción." }
+    files:
+      - name: "promo_config"
+        label: "🎉 Configuración del Pop-up"
+        file: "public/content/promo.json"
+        fields:
+          - { label: "¿Mostrar Pop-up?", name: "activo", widget: "boolean", default: true, hint: "Activa o desactiva el pop-up manualmente en cualquier momento." }
+          - { label: "Flyer Promocional (Imagen)", name: "imagen_flyer", widget: "image", required: true, hint: "Sube la imagen/flyer de la promoción (JPG o PNG)." }
+          - { label: "Descripción de la imagen (alt)", name: "titulo_alt", widget: "string", default: "Promoción Seiken Box", hint: "Texto descriptivo de la imagen (importante para accesibilidad)." }
+          - { label: "📅 Fecha y hora de INICIO", name: "fecha_inicio", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "DD/MM/YYYY", time_format: "HH:mm", hint: "El pop-up se activará automáticamente a partir de esta fecha y hora." }
+          - { label: "📅 Fecha y hora de FIN", name: "fecha_fin", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "DD/MM/YYYY", time_format: "HH:mm", hint: "El pop-up se ocultará automáticamente después de esta fecha y hora." }
+          - { label: "Enlace de WhatsApp (Botón)", name: "link_whatsapp", widget: "string", default: "https://wa.me/59169680009?text=Hola!%20Quiero%20informacion%20de%20la%20promo", hint: "URL completa de WhatsApp con mensaje predefinido." }
+          - { label: "Texto del Botón", name: "boton_texto", widget: "string", default: "Reclamar Promo por WhatsApp", hint: "Texto que aparece en el botón de llamada a la acción." }
 
   - name: "wod"
     label: "💪 WOD de la Semana"
-    file: "public/content/wod.json"
     description: "Actualiza la programación del WOD del Sábado o de la semana que se muestra en el sitio."
-    fields:
-      - { label: "Etiqueta de categoría", name: "categoria", widget: "string", default: "WOD del Sábado", hint: "Ej: 'WOD del Sábado' o 'WOD de la Semana'" }
-      - { label: "Fecha a mostrar en el sitio", name: "fecha_label", widget: "string", default: "Sáb 21 Jun", hint: "Texto libre, ej: 'Sáb 02 Ago'" }
-      - { label: "Horarios de clases", name: "fecha_sub", widget: "string", default: "08:30 · 09:30 · 10:30", hint: "Ej: '08:30 · 09:30 · 10:30'" }
-      - label: "Bloques del Entrenamiento"
-        name: "bloques"
-        widget: "list"
-        label_singular: "Bloque"
-        summary: "{{fields.tag}}"
+    files:
+      - name: "wod_config"
+        label: "💪 WOD de esta semana"
+        file: "public/content/wod.json"
         fields:
-          - { label: "Etiqueta del bloque", name: "tag", widget: "string", hint: "Ej: 'Calentamiento · 10 min' o 'WOD · AMRAP 15 min'" }
-          - { label: "Estilo visual", name: "tipo", widget: "select", options: [{label: "Normal (fondo neutro)", value: "normal"}, {label: "Principal (fondo oscuro)", value: "main"}, {label: "Destacado (fondo verde)", value: "accent"}], default: "normal" }
-          - { label: "Título / Movimiento principal", name: "titulo", widget: "string", required: false, hint: "Ej: 'Back Squat', 'For Time'. Dejar vacío si no aplica." }
-          - label: "Ejercicios (uno por línea)"
-            name: "items"
+          - { label: "Etiqueta de categoría", name: "categoria", widget: "string", default: "WOD del Sábado", hint: "Ej: 'WOD del Sábado' o 'WOD de la Semana'" }
+          - { label: "Fecha a mostrar en el sitio", name: "fecha_label", widget: "string", default: "Sáb 21 Jun", hint: "Texto libre, ej: 'Sáb 02 Ago'" }
+          - { label: "Horarios de clases", name: "fecha_sub", widget: "string", default: "08:30 · 09:30 · 10:30", hint: "Ej: '08:30 · 09:30 · 10:30'" }
+          - label: "Bloques del Entrenamiento"
+            name: "bloques"
             widget: "list"
-            hint: "Cada elemento es una línea del WOD."
-          - { label: "Nota RX", name: "rx_note", widget: "string", required: false, hint: "Ej: 'RX · Scaled disponible'. Dejar vacío si no aplica." }
+            label_singular: "Bloque"
+            summary: "{{fields.tag}}"
+            fields:
+              - { label: "Etiqueta del bloque", name: "tag", widget: "string", hint: "Ej: 'Calentamiento · 10 min' o 'WOD · AMRAP 15 min'" }
+              - { label: "Estilo visual", name: "tipo", widget: "select", options: [{label: "Normal (fondo neutro)", value: "normal"}, {label: "Principal (fondo oscuro)", value: "main"}, {label: "Destacado (fondo verde)", value: "accent"}], default: "normal" }
+              - { label: "Título / Movimiento principal", name: "titulo", widget: "string", required: false, hint: "Ej: 'Back Squat', 'For Time'. Dejar vacío si no aplica." }
+              - label: "Ejercicios (uno por línea)"
+                name: "items"
+                widget: "list"
+                hint: "Cada elemento es una línea del WOD."
+              - { label: "Nota RX", name: "rx_note", widget: "string", required: false, hint: "Ej: 'RX · Scaled disponible'. Dejar vacío si no aplica." }

@@ -564,7 +564,7 @@
             </div>
           </div>
           <p class="memb-block-note" id="memb-personalizado-note">El head coach diseña un programa 100% basado en tus metas. Evaluación inicial, plan diario desde la app y ajustes de progreso cada ciclo. Consulta el precio directamente con el equipo.</p>
-          <a class="more" href="https://wa.me/59169680009?text=Hola!%20Quiero%20info%20sobre%20el%20plan%20personalizado" target="_blank" rel="noopener" style="margin-top:16px;display:inline-flex">Consultar por WhatsApp <span>→</span></a>
+          <a class="more" id="memb-personalizado-wa" href="https://wa.me/59169680009?text=Hola!%20Quiero%20info%20sobre%20el%20plan%20personalizado" target="_blank" rel="noopener" style="margin-top:16px;display:inline-flex">Consultar por WhatsApp <span>→</span></a>
         </div>
 
         <!-- BLOQUE 3: ENTRENAMIENTO + NUTRICIÓN -->
@@ -1449,6 +1449,19 @@
                 + '<div class="memb-price-wrap"><span class="memb-curr">Bs.</span><span class="memb-amt">' + p.precio + '</span><span class="memb-per">/' + p.unidad + '</span></div>'
                 + '</div>';
             }).join('');
+          }
+          if (d.plan_personalizado) {
+            var ppEl = document.getElementById('memb-personalizado-rows');
+            var ppNote = document.getElementById('memb-personalizado-note');
+            var ppWa = document.getElementById('memb-personalizado-wa');
+            if (ppEl) {
+              var t = d.plan_personalizado;
+              var tagHtml = t.tag ? '<span class="memb-tag memb-tag-accent">' + t.tag + '</span>' : '';
+              ppEl.innerHTML = '<div class="memb-row memb-row-highlight"><div class="memb-name">' + t.titulo + ' ' + tagHtml + '</div>'
+                + '<div class="memb-price-wrap"><span class="memb-amt">' + t.precio_texto + '</span></div></div>';
+              if (ppNote && t.descripcion) ppNote.textContent = t.descripcion;
+              if (ppWa && t.whatsapp_texto) ppWa.href = 'https://wa.me/59169680009?text=' + encodeURIComponent(t.whatsapp_texto);
+            }
           }
           if (nutEl && Array.isArray(d.planes_nutricion) && d.planes_nutricion.length) {
             var p = d.planes_nutricion[0];

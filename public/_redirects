@@ -1,3 +1,4 @@
 # Cloudflare Pages — Reglas de enrutamiento
 # No se necesita fallback SPA porque el sitio es HTML estático.
-# Cloudflare Pages sirve /admin/index.html automáticamente al visitar /admin/
+# Forzamos que Cloudflare Pages sirva el CMS Sveltia en la ruta admin
+/admin/* /admin/index.html 200

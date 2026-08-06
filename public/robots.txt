@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /_headers
+Disallow: /_redirects
+
+Sitemap: https://seikenbox.com/sitemap.xml

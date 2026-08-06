@@ -72,6 +72,15 @@ collections:
               - { label: "Unidad", name: "unidad", widget: "string", hint: "Ej: mes, trimestre, semestre" }
               - { label: "Etiqueta adicional", name: "tag", widget: "string", required: false, hint: "Ej: '2 cuotas · Recomendado'. Dejar vacío si no aplica." }
               - { label: "¿Mostrar como destacado?", name: "destacado", widget: "boolean", default: false, hint: "Resalta este plan con un borde verde." }
+          - label: "Plan Personalizado · Diseño Individual"
+            name: "plan_personalizado"
+            widget: "object"
+            fields:
+              - { label: "Título del plan", name: "titulo", widget: "string", default: "Plan Mensual" }
+              - { label: "Etiqueta", name: "tag", widget: "string", default: "Head Coach · Opex" }
+              - { label: "Precio (texto)", name: "precio_texto", widget: "string", default: "A consultar", hint: "Ej: 'A consultar' o 'Bs. 350'" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Mensaje de WhatsApp para consultar precio", name: "whatsapp_texto", widget: "string", default: "Hola! Quiero info sobre el plan personalizado" }
           - label: "Planes Entrenamiento + Nutrición"
             name: "planes_nutricion"
             widget: "list"

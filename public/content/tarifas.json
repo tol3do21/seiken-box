@@ -6,6 +6,13 @@
     { "nombre": "Trimestral", "precio": 845, "unidad": "trimestre", "tag": "2 cuotas · Recomendado", "destacado": true },
     { "nombre": "Semestral", "precio": 1545, "unidad": "semestre", "tag": "3 cuotas", "destacado": false }
   ],
+  "plan_personalizado": {
+    "titulo": "Plan Mensual",
+    "tag": "Head Coach · Opex",
+    "precio_texto": "A consultar",
+    "descripcion": "El head coach diseña un programa 100% basado en tus metas. Evaluación inicial, plan diario desde la app y ajustes de progreso cada ciclo. Consulta el precio directamente con el equipo.",
+    "whatsapp_texto": "Hola! Quiero info sobre el plan personalizado"
+  },
   "planes_nutricion": [
     { "nombre": "Mensual", "precio": 465, "unidad": "mes", "tag": "by Nutrilara", "descripcion": "Plan alimenticio personalizado integrado a tu entrenamiento, con seguimiento continuo de Nutrilara." }
   ]

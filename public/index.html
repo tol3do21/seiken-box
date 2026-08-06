@@ -1177,29 +1177,221 @@
   </script>
 
   <!-- ====================================================
-       MODAL POP-UP PROMOCIONAL — Gestionado por Decap CMS
+       MODAL POP-UP PROMOCIONAL — ESTILO SEIKEN
        ===================================================== -->
-  <div id="promo-modal" role="dialog" aria-modal="true" aria-label="Promoción especial Seiken Box" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity 0.35s ease">
-    <div id="promo-modal-card" style="position:relative;width:100%;max-width:480px;background:#141414;border:1px solid rgba(0,204,0,0.30);border-radius:18px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);transform:scale(0.92);transition:transform 0.35s cubic-bezier(.34,1.56,.64,1)">
+  <style>
+    #promo-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.90);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    #promo-modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      background: #090909;
+      border: 1px solid rgba(0,204,0,0.55);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,204,0,0.12), 0 32px 100px rgba(0,0,0,0.85), 0 0 60px rgba(0,204,0,0.08);
+      transform: scale(0.90) translateY(16px);
+      transition: transform 0.45s cubic-bezier(.34,1.56,.64,1);
+    }
+    /* Línea superior verde eléctrica */
+    #promo-modal-card::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, #00cc00 0%, #00ff41 50%, #00cc00 100%);
+      box-shadow: 0 0 16px rgba(0,204,0,0.7);
+    }
+    /* Header de marca */
+    #promo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px 8px;
+      background: #0d0d0d;
+      border-bottom: 1px solid rgba(0,204,0,0.15);
+    }
+    #promo-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #promo-header-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: #00cc00;
+      text-transform: uppercase;
+    }
+    #promo-header-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.10em;
+      color: #444;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+    #promo-close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 2px;
+      color: #555;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    #promo-close-btn:hover { border-color: #00cc00; color: #00cc00; }
+    /* Imagen */
+    #promo-img-wrap {
+      width: 100%;
+      background: #000;
+      line-height: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 65vh;
+      position: relative;
+    }
+    /* Líneas de escaneo tácticas (overlay decorativo) */
+    #promo-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,0.04) 3px,
+        rgba(0,0,0,0.04) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+    #promo-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 65vh;
+      display: block;
+    }
+    /* Corner brackets tácticos */
+    #promo-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(0,204,0,0.20);
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    /* Footer */
+    #promo-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      background: #0d0d0d;
+      border-top: 1px solid rgba(0,204,0,0.18);
+      flex-wrap: wrap;
+    }
+    #promo-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #555;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    #promo-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00cc00;
+      box-shadow: 0 0 6px #00cc00;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    #promo-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: #00cc00;
+      color: #000;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    #promo-cta-btn:hover {
+      background: #00ff41;
+      box-shadow: 0 0 20px rgba(0,204,0,0.5);
+      transform: translateY(-1px);
+    }
+    #promo-cta-btn:active { transform: translateY(0); }
+  </style>
 
-      <!-- Botón de cierre -->
-      <button id="promo-close-btn" aria-label="Cerrar promoción" style="position:absolute;top:12px;right:12px;z-index:10;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.12);color:#fff;cursor:pointer;transition:background 0.2s,color 0.2s">
-        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-      </button>
+  <div id="promo-modal" role="dialog" aria-modal="true" aria-label="Promoción especial Seiken Box">
+    <div id="promo-modal-card">
 
-      <!-- Imagen del Flyer -->
-      <div style="width:100%;background:#000;line-height:0;max-height:72vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
-        <img id="promo-img" src="" alt="Promoción Seiken Box" style="width:100%;height:auto;object-fit:contain;max-height:72vh;display:block" loading="lazy" />
+      <!-- Header de marca Seiken -->
+      <div id="promo-header">
+        <div id="promo-header-left">
+          <svg height="22" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <text x="0" y="26" font-family="Archivo Black,sans-serif" font-size="26" fill="#00cc00" letter-spacing="-1">SEIKEN</text>
+          </svg>
+          <div>
+            <div id="promo-header-label">⚡ Promo Especial</div>
+            <div id="promo-header-sub">TRAINING BOX · SUCRE</div>
+          </div>
+        </div>
+        <button id="promo-close-btn" aria-label="Cerrar promoción">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
       </div>
 
-      <!-- Footer con CTA -->
-      <div style="padding:14px 18px;background:#181818;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-        <div style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:0.04em;white-space:nowrap">
-          <span style="width:8px;height:8px;border-radius:50%;background:#00cc00;display:inline-block;animation:pulse 2s infinite"></span>
-          Promo activa
+      <!-- Imagen del Flyer -->
+      <div id="promo-img-wrap">
+        <img id="promo-img" src="" alt="Promoción Seiken Box" loading="lazy" />
+      </div>
+
+      <!-- Footer Seiken -->
+      <div id="promo-footer">
+        <div id="promo-status">
+          <span id="promo-status-dot"></span>
+          <span>PROMO ACTIVA</span>
         </div>
-        <a id="promo-cta-btn" href="https://wa.me/59169680009" target="_blank" rel="noopener" class="cta" style="flex-shrink:0;padding:10px 20px;font-size:13px">
-          <span id="promo-cta-text">Reclamar Promo por WhatsApp</span> <span>→</span>
+        <a id="promo-cta-btn" href="https://wa.me/59169680009" target="_blank" rel="noopener">
+          <span id="promo-cta-text">CONTACTANOS</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 

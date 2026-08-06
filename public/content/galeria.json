@@ -1,0 +1,13 @@
+﻿{
+  "fotos": [
+    { "src": "/imagen/seiken-box-comunidad.jpg", "alt": "Atletas en comunidad entrenando duro en las instalaciones de Seiken Box Sucre", "posicion": "g1" },
+    { "src": "/imagen/seiken-ig-reciente-09.jpg", "alt": "Atleta de Seiken Box ejecutando peso muerto con barra cargada", "posicion": "g2" },
+    { "src": "/imagen/seiken-ig-reciente-05.jpg", "alt": "Atleta de Seiken Box trabajando con kettlebell durante clase grupal", "posicion": "g3" },
+    { "src": "/imagen/seiken-ig-reciente-10.jpg", "alt": "Atleta de Seiken Box realizando remo con mancuerna en posición de plancha", "posicion": "g4" },
+    { "src": "/imagen/seiken-box-indicaciones-coach.jpg", "alt": "Programación del WOD e indicaciones del coach en Seiken Box", "posicion": "g5" },
+    { "src": "/imagen/seiken-ig-reciente-11.jpg", "alt": "Atleta de Seiken Box entrenando en máquina cardio con concentración", "posicion": "g6" },
+    { "src": "/imagen/seiken-ig-reciente-02.jpg", "alt": "Atleta de Seiken Box preparándose antes de la clase", "posicion": "g7" }
+  ],
+  "instagram_handle": "@seiken.box",
+  "instagram_stats": "321 posts · 2.8K seguidores"
+}

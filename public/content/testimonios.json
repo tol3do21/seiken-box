@@ -1,0 +1,9 @@
+﻿{
+  "calificacion": "4.9",
+  "total_resenas": "14",
+  "testimonios": [
+    { "texto": "Nice work-outs, great coaches, a pleasant atmosphere, and good equipment. Highly recommended!", "autor": "Aukje Hofman", "fuente": "Google · Local Guide", "iniciales": "AH", "destacado": true },
+    { "texto": "Excelentes instructores, lugar impecable, siempre limpio y con desinfección continúa.", "autor": "Monica Marin", "fuente": "Google · Local Guide", "iniciales": "MM", "destacado": false },
+    { "texto": "Amplio lugar, bien equipado y ventilado, personal calificado; se ven resultados rápido!!", "autor": "Iván Chávez Gutiérrez", "fuente": "Google · Local Guide", "iniciales": "IC", "destacado": false }
+  ]
+}

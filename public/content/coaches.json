@@ -1,0 +1,9 @@
+﻿{
+  "coaches": [
+    { "nombre": "Esteban Urioste", "rol": "Fundador · Head Coach", "foto": "/imagen/coach_esteban.jpg", "tags": ["Fundador", "Opex"], "orden": 1 },
+    { "nombre": "Gabriel Salinas", "rol": "Coach", "foto": "/imagen/coach_gabriel.jpg", "tags": ["WOD", "Fuerza"], "orden": 2 },
+    { "nombre": "Carolina Paniagua", "rol": "Coach", "foto": "/imagen/coach_carolina_paniagua.jpg", "tags": ["Fuerza", "Gymnastics"], "orden": 3 },
+    { "nombre": "Jairo Albornoz", "rol": "Coach", "foto": "/imagen/coach_jairo.jpg", "tags": ["Endurance", "Olympic"], "orden": 4 },
+    { "nombre": "Lara Soliz", "rol": "Coach · Nutrición", "foto": "/imagen/coach_lara_nutrilara.jpg", "tags": ["Nutrición", "Bienestar"], "orden": 5 }
+  ]
+}

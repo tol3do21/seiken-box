@@ -342,7 +342,7 @@
             Opex. Una sola filosofía: técnica primero, intensidad después, comunidad siempre.</p>
         </div>
 
-        <div class="coaches-grid">
+        <div class="coaches-grid" id="coaches-grid">
           <div class="coach">
             <div class="coach-photo">
               <img src="imagen/coach_esteban.jpg" alt="Esteban Urioste - Fundador y Head Coach Seiken" loading="lazy" />
@@ -429,12 +429,12 @@
           <div class="section-eyebrow"><span class="dash"></span><span>04 · Testimonios</span></div>
           <h2>La comunidad<br /><em>habla</em>.</h2>
           <div class="testi-rating-bar">
-            <span class="testi-rating-num">4.9</span>
+            <span class="testi-rating-num" id="testi-rating-num">4.9</span>
             <span class="testi-rating-stars">★★★★★</span>
-            <span class="testi-rating-src">14 opiniones en Google</span>
+            <span class="testi-rating-src" id="testi-rating-src">14 opiniones en Google</span>
           </div>
         </div>
-        <div class="testimonios-grid">
+        <div class="testimonios-grid" id="testimonios-grid">
 
           <div class="testi testi-feature">
             <div class="testi-stars">★★★★★</div>
@@ -504,7 +504,7 @@
             <div class="memb-block-label">Entrenamiento Individual</div>
             <div class="memb-divider-line" aria-hidden="true"></div>
           </div>
-          <div class="memb-rows">
+          <div class="memb-rows" id="memb-individual-rows">
             <div class="memb-row">
               <div class="memb-name">Mensual</div>
               <div class="memb-price-wrap">
@@ -554,7 +554,7 @@
             <div class="memb-block-label">Entrenamiento + Nutrición</div>
             <div class="memb-divider-line" aria-hidden="true"></div>
           </div>
-          <div class="memb-rows">
+          <div class="memb-rows" id="memb-nutricion-rows">
             <div class="memb-row">
               <div class="memb-name">Mensual <span class="memb-tag memb-tag-dark">by Nutrilara</span></div>
               <div class="memb-price-wrap">
@@ -564,7 +564,7 @@
               </div>
             </div>
           </div>
-          <p class="memb-block-note">Plan alimenticio personalizado integrado a tu entrenamiento, con seguimiento continuo de Nutrilara.</p>
+          <p class="memb-block-note" id="memb-nutricion-note">Plan alimenticio personalizado integrado a tu entrenamiento, con seguimiento continuo de Nutrilara.</p>
         </div>
 
       </div>
@@ -594,7 +594,8 @@
               <div class="cell">Jue</div>
               <div class="cell">Vie</div>
             </div>
-            <!-- MAÑANA -->
+            <span id="schedule-table-body" style="display:contents"></span>
+            <!-- MAÑANA (fallback estático) -->
             <div class="grid-row" data-period="manana">
               <div class="cell time">06:00</div>
               <div class="cell"><span class="slot wod">Clases Grupales</span></div>
@@ -698,10 +699,8 @@
             Open Box Lun–Vie
           </div>
           <div class="openbox-times">
-            <div class="openbox-group"><span class="openbox-period">Mañana</span><span>07:30–09:00 · 09:00–10:30 ·
-                10:30–12:30</span></div>
-            <div class="openbox-group"><span class="openbox-period">Tarde</span><span>15:30–17:00 · 17:00–18:30 ·
-                18:30–20:00 · 20:00–21:30</span></div>
+              <div class="openbox-group"><span class="openbox-period">Mañana</span><span id="openbox-manana">07:30–09:00 · 09:00–10:30 · 10:30–12:30</span></div>
+              <div class="openbox-group"><span class="openbox-period">Tarde</span><span id="openbox-tarde">15:30–17:00 · 17:00–18:30 · 18:30–20:00 · 20:00–21:30</span></div>
           </div>
         </div>
         <div class="schedule-openbox" style="margin-top:12px">
@@ -715,9 +714,8 @@
             Sábado – Feriados
           </div>
           <div class="openbox-times">
-            <div class="openbox-group"><span class="openbox-period">Clases + Open Box</span><span>08:30 · 09:30 ·
-                10:30</span></div>
-            <div class="openbox-group"><span class="openbox-period">Solo Open Box</span><span>11:30–12:30</span></div>
+              <div class="openbox-group"><span class="openbox-period">Clases + Open Box</span><span id="sabado-clases">08:30 · 09:30 · 10:30</span></div>
+              <div class="openbox-group"><span class="openbox-period">Solo Open Box</span><span id="sabado-openbox">11:30–12:30</span></div>
           </div>
         </div>
         <div class="openbox-group"
@@ -799,7 +797,7 @@
             Una mirada real a lo que pasa cada día en Seiken.</p>
         </div>
 
-        <div class="gallery-grid">
+        <div class="gallery-grid" id="gallery-grid">
           <img id="gal-01" class="g1" src="imagen/seiken-box-comunidad.jpg"
             alt="Atletas en comunidad entrenando duro en las instalaciones de Seiken Box Sucre" loading="lazy" />
           <img id="gal-02" class="g2" src="imagen/seiken-ig-reciente-09.jpg"
@@ -820,8 +818,8 @@
           <span><svg width="10" height="13" viewBox="0 0 10 13" fill="currentColor" aria-hidden="true"
               style="display:inline-block;vertical-align:middle;margin-right:5px">
               <path d="M6 0L0 7h4l-1 6 7-7H6z" />
-            </svg>@seiken.box</span>
-          <span>321 posts · 2.8K seguidores</span>
+            </svg><span id="gallery-ig-handle">@seiken.box</span></span>
+          <span id="gallery-ig-stats">321 posts · 2.8K seguidores</span>
           <span>Sucre · BO · 2026</span>
         </div>
       </div>
@@ -840,28 +838,26 @@
             <div class="info-grid">
               <div class="info-cell">
                 <div class="lab">Dirección</div>
-                <div class="val">Jaime Mendoza #508<br />Sucre, Bolivia</div>
+                <div class="val" id="loc-direccion">Jaime Mendoza #508<br />Sucre, Bolivia</div>
               </div>
               <div class="info-cell">
                 <div class="lab">Horario</div>
-                <div class="val">L–V · 06:00 – 21:00<br />Sáb · 08:00 – 12:00</div>
+                <div class="val"><span id="loc-horario-semana">L–V · 06:00 – 21:00</span><br /><span id="loc-horario-sabado">Sáb · 08:00 – 12:00</span></div>
               </div>
               <div class="info-cell">
                 <div class="lab">WhatsApp</div>
-                <div class="val"><a href="https://wa.me/59169680009" target="_blank" rel="noopener"
-                    style="color:inherit">+591 69680009</a></div>
+                <div class="val"><a id="loc-whatsapp-link" href="https://wa.me/59169680009" target="_blank" rel="noopener" style="color:inherit"><span id="loc-whatsapp">+591 69680009</span></a></div>
               </div>
               <div class="info-cell">
                 <div class="lab">Email</div>
-                <div class="val"><a href="mailto:contacto@seikenbox.com"
-                    style="color:inherit">contacto@seikenbox.com</a></div>
+                <div class="val"><a id="loc-email-link" href="mailto:contacto@seikenbox.com" style="color:inherit"><span id="loc-email">contacto@seikenbox.com</span></a></div>
               </div>
             </div>
           </div>
 
           <div class="map-wrap">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.3392015937766!2d-65.25122102403694!3d-19.048818311476534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93fbcf18c1dd3e79%3A0xa316bd2d2959b8f1!2sSEIKEN%20training%20box!5e0!3m2!1ses-419!2sbo!4v1781233621028!5m2!1ses-419!2sbo"
+              id="loc-maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.3392015937766!2d-65.25122102403694!3d-19.048818311476534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93fbcf18c1dd3e79%3A0xa316bd2d2959b8f1!2sSEIKEN%20training%20box!5e0!3m2!1ses-419!2sbo!4v1781233621028!5m2!1ses-419!2sbo"
               width="100%" height="100%" style="border:0;position:absolute;inset:0;display:block" allowfullscreen=""
               loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
@@ -938,12 +934,12 @@
       <div class="foot-col">
         <h4>Contacto</h4>
         <ul>
-          <li><a href="https://wa.me/59169680009" target="_blank" rel="noopener">+591 69680009</a></li>
-          <li><a href="mailto:contacto@seikenbox.com">contacto@seikenbox.com</a></li>
+          <li><a id="foot-wa" href="https://wa.me/59169680009" target="_blank" rel="noopener">+591 69680009</a></li>
+          <li><a id="foot-email" href="mailto:contacto@seikenbox.com">contacto@seikenbox.com</a></li>
           <li><a href="#contacto">Jaime Mendoza #508</a></li>
         </ul>
         <div class="foot-social">
-          <a href="https://instagram.com/seiken.box" target="_blank" rel="noopener" aria-label="Instagram">
+          <a id="foot-instagram" href="https://instagram.com/seiken.box" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
               stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -951,7 +947,7 @@
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
           </a>
-          <a href="https://facebook.com/seiken.box" target="_blank" rel="noopener" aria-label="Facebook">
+          <a id="foot-facebook" href="https://facebook.com/seiken.box" target="_blank" rel="noopener" aria-label="Facebook">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -1417,6 +1413,174 @@
           }
         })
         .catch(function (err) { console.log('Usando WOD estático por defecto:', err); });
+
+      /* ---- 3. TARIFAS DINÁMICAS ---- */
+      fetch('content/tarifas.json')
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (!d) return;
+          var indEl = document.getElementById('memb-individual-rows');
+          var nutEl = document.getElementById('memb-nutricion-rows');
+          var nutNote = document.getElementById('memb-nutricion-note');
+          if (indEl && Array.isArray(d.planes_individuales)) {
+            indEl.innerHTML = d.planes_individuales.map(function(p){
+              var tagHtml = p.tag ? '<span class="memb-tag' + (p.destacado ? ' memb-tag-accent' : '') + '">' + p.tag + '</span>' : '';
+              return '<div class="memb-row' + (p.destacado ? ' memb-row-highlight' : '') + '">'
+                + '<div class="memb-name">' + p.nombre + ' ' + tagHtml + '</div>'
+                + '<div class="memb-price-wrap"><span class="memb-curr">Bs.</span><span class="memb-amt">' + p.precio + '</span><span class="memb-per">/' + p.unidad + '</span></div>'
+                + '</div>';
+            }).join('');
+          }
+          if (nutEl && Array.isArray(d.planes_nutricion) && d.planes_nutricion.length) {
+            var p = d.planes_nutricion[0];
+            var tagHtml = p.tag ? '<span class="memb-tag memb-tag-dark">' + p.tag + '</span>' : '';
+            nutEl.innerHTML = '<div class="memb-row"><div class="memb-name">' + p.nombre + ' ' + tagHtml + '</div>'
+              + '<div class="memb-price-wrap"><span class="memb-curr">Bs.</span><span class="memb-amt memb-amt-accent">' + p.precio + '</span><span class="memb-per">/' + p.unidad + '</span></div></div>';
+            if (nutNote && p.descripcion) nutNote.textContent = p.descripcion;
+          }
+        }).catch(function(){});
+
+      /* ---- 4. HORARIOS DINÁMICOS ---- */
+      fetch('content/horarios.json')
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (!d) return;
+          var slotHtml = '<span class="slot wod">Clases Grupales</span>';
+          var dias = ['Lun','Mar','Mié','Jue','Vie'];
+          var tableBody = document.getElementById('schedule-table-body');
+          if (tableBody) {
+            var manana = (d.clases_manana || []).map(function(h){
+              return '<div class="grid-row" data-period="manana"><div class="cell time">' + h + '</div>'
+                + dias.map(function(){ return '<div class="cell">' + slotHtml + '</div>'; }).join('')
+                + '</div>';
+            }).join('');
+            var tarde = (d.clases_tarde || []).map(function(h){
+              return '<div class="grid-row" data-period="tarde" style="display:none"><div class="cell time">' + h + '</div>'
+                + dias.map(function(){ return '<div class="cell">' + slotHtml + '</div>'; }).join('')
+                + '</div>';
+            }).join('');
+            tableBody.innerHTML = manana + tarde;
+          }
+          var obMEl = document.getElementById('openbox-manana');
+          var obTEl = document.getElementById('openbox-tarde');
+          var sabClEl = document.getElementById('sabado-clases');
+          var sabObEl = document.getElementById('sabado-openbox');
+          var locHsEl = document.getElementById('loc-horario-semana');
+          var locHabEl = document.getElementById('loc-horario-sabado');
+          if (obMEl && d.openbox_manana) obMEl.textContent = d.openbox_manana;
+          if (obTEl && d.openbox_tarde) obTEl.textContent = d.openbox_tarde;
+          if (sabClEl && d.sabado_clases) sabClEl.textContent = d.sabado_clases;
+          if (sabObEl && d.sabado_openbox) sabObEl.textContent = d.sabado_openbox;
+          if (locHsEl && d.horario_semana) locHsEl.textContent = d.horario_semana;
+          if (locHabEl && d.horario_sabado) locHabEl.textContent = d.horario_sabado;
+        }).catch(function(){});
+
+      /* ---- 5. TESTIMONIOS DINÁMICOS ---- */
+      fetch('content/testimonios.json')
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (!d) return;
+          var ratingNum = document.getElementById('testi-rating-num');
+          var ratingSrc = document.getElementById('testi-rating-src');
+          var grid = document.getElementById('testimonios-grid');
+          if (ratingNum && d.calificacion) ratingNum.textContent = d.calificacion;
+          if (ratingSrc && d.total_resenas) ratingSrc.textContent = d.total_resenas + ' opiniones en Google';
+          if (grid && Array.isArray(d.testimonios)) {
+            grid.innerHTML = d.testimonios.map(function(t){
+              return '<div class="testi' + (t.destacado ? ' testi-feature' : '') + '">'
+                + '<div class="testi-stars">★★★★★</div>'
+                + '<p class="testi-text">"' + t.texto + '"</p>'
+                + '<div class="testi-author">'
+                + '<div class="testi-avatar">' + (t.iniciales || '') + '</div>'
+                + '<div><div class="testi-name">' + t.autor + '</div>'
+                + '<div class="testi-since">' + t.fuente + '</div></div>'
+                + '</div></div>';
+            }).join('');
+          }
+        }).catch(function(){});
+
+      /* ---- 6. COACHES DINÁMICOS ---- */
+      fetch('content/coaches.json')
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (!d || !Array.isArray(d.coaches)) return;
+          var grid = document.getElementById('coaches-grid');
+          if (!grid) return;
+          var sorted = d.coaches.slice().sort(function(a,b){ return (a.orden||0)-(b.orden||0); });
+          grid.innerHTML = sorted.map(function(c, i){
+            var tagsHtml = (c.tags || []).map(function(t){ return '<span>' + t + '</span>'; }).join('');
+            var nombreParts = c.nombre.split(' ');
+            var nombreHtml = nombreParts.length > 1
+              ? nombreParts[0] + '<br>' + nombreParts.slice(1).join(' ')
+              : c.nombre;
+            return '<div class="coach">'
+              + '<div class="coach-photo"><img src="' + c.foto + '" alt="' + c.nombre + ' - ' + c.rol + ' de Seiken Box" loading="lazy"></div>'
+              + '<div class="coach-info"><div>'
+              + '<div class="coach-name">' + nombreHtml + '</div>'
+              + '<div class="coach-role">' + c.rol + '</div>'
+              + '</div><div class="coach-num">/' + String(i+1).padStart(2,'0') + '</div></div>'
+              + '<div class="coach-tags">' + tagsHtml + '</div>'
+              + '</div>';
+          }).join('');
+        }).catch(function(){});
+
+      /* ---- 7. GALERÍA DINÁMICA ---- */
+      fetch('content/galeria.json')
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (!d || !Array.isArray(d.fotos)) return;
+          var grid = document.getElementById('gallery-grid');
+          var igHandle = document.getElementById('gallery-ig-handle');
+          var igStats = document.getElementById('gallery-ig-stats');
+          if (grid) {
+            grid.innerHTML = d.fotos.map(function(f){
+              return '<img class="' + (f.posicion || '') + '" src="' + f.src + '" alt="' + f.alt + '" loading="lazy">';
+            }).join('');
+          }
+          if (igHandle && d.instagram_handle) igHandle.textContent = d.instagram_handle;
+          if (igStats && d.instagram_stats) igStats.textContent = d.instagram_stats;
+        }).catch(function(){});
+
+      /* ---- 8. CONTACTO DINÁMICO ---- */
+      fetch('content/contacto.json')
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (!d) return;
+          var waLink = 'https://wa.me/' + (d.whatsapp_numero || '59169680009');
+          document.querySelectorAll('a[data-wa]').forEach(function(el){
+            el.href = waLink;
+            if (el.dataset.waText) el.querySelector('[data-wa-label]') && (el.querySelector('[data-wa-label]').textContent = d.whatsapp_texto || el.textContent);
+          });
+          var locDir = document.getElementById('loc-direccion');
+          var locWa = document.getElementById('loc-whatsapp');
+          var locWaLink = document.getElementById('loc-whatsapp-link');
+          var locEmail = document.getElementById('loc-email');
+          var locEmailLink = document.getElementById('loc-email-link');
+          var locHs = document.getElementById('loc-horario-semana');
+          var locHsab = document.getElementById('loc-horario-sabado');
+          var mapsFrame = document.getElementById('loc-maps');
+          var footWa = document.getElementById('foot-wa');
+          var footEmail = document.getElementById('foot-email');
+          var footInsta = document.getElementById('foot-instagram');
+          var footFb = document.getElementById('foot-facebook');
+          var ctaWa = document.getElementById('cta-whatsapp-final');
+          var ctaEmail = document.getElementById('cta-email-final');
+          if (locDir && d.direccion) locDir.textContent = d.direccion + '\n' + d.ciudad;
+          if (locWa && d.whatsapp_texto) locWa.textContent = d.whatsapp_texto;
+          if (locWaLink) locWaLink.href = waLink;
+          if (locEmail && d.email) locEmail.textContent = d.email;
+          if (locEmailLink && d.email) { locEmailLink.href = 'mailto:' + d.email; locEmailLink.textContent = d.email; }
+          if (locHs && d.horario_semana) locHs.textContent = d.horario_semana;
+          if (locHsab && d.horario_sabado) locHsab.textContent = d.horario_sabado;
+          if (mapsFrame && d.maps_embed) mapsFrame.src = d.maps_embed;
+          if (footWa) { footWa.href = waLink; footWa.textContent = d.whatsapp_texto || footWa.textContent; }
+          if (footEmail) { footEmail.href = 'mailto:' + d.email; footEmail.textContent = d.email; }
+          if (footInsta && d.instagram) footInsta.href = d.instagram;
+          if (footFb && d.facebook) footFb.href = d.facebook;
+          if (ctaWa) ctaWa.href = waLink;
+          if (ctaEmail && d.email) { ctaEmail.href = 'mailto:' + d.email; ctaEmail.textContent = '✉ ' + d.email; }
+        }).catch(function(){});
+
     });
   </script>
 

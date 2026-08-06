@@ -2,53 +2,198 @@ backend:
   name: github
   repo: tol3do21/seiken-box
   branch: main
-  # Worker de autenticación OAuth desplegado en Cloudflare Workers (plan gratuito)
   base_url: https://sveltia-cms-auth.tol3do21.workers.dev
 
-# Cloudflare Pages: la raíz del sitio es /public
-# Las rutas de media_folder son relativas a la raíz del repositorio
-media_folder: "public/imagen/promos"
-public_folder: "/imagen/promos"
+media_folder: "public/imagen/cms"
+public_folder: "/imagen/cms"
 
 collections:
+
+  # ─── 1. POP-UP PROMOCIONAL ──────────────────────────────────────────────────
   - name: "promo"
     label: "🎉 Pop-up Promocional"
-    description: "Configura la imagen del flyer, las fechas de activación y el enlace de WhatsApp del pop-up promocional."
+    description: "Configura la imagen del flyer, fechas de activación y enlace de WhatsApp."
     files:
       - name: "promo_config"
         label: "🎉 Configuración del Pop-up"
         file: "public/content/promo.json"
         fields:
-          - { label: "¿Mostrar Pop-up?", name: "activo", widget: "boolean", default: true, hint: "Activa o desactiva el pop-up manualmente en cualquier momento." }
+          - { label: "¿Mostrar Pop-up?", name: "activo", widget: "boolean", default: true, hint: "Activa o desactiva el pop-up en cualquier momento." }
           - { label: "Flyer Promocional (Imagen)", name: "imagen_flyer", widget: "image", required: true, hint: "Sube la imagen/flyer de la promoción (JPG o PNG)." }
-          - { label: "Descripción de la imagen (alt)", name: "titulo_alt", widget: "string", default: "Promoción Seiken Box", hint: "Texto descriptivo de la imagen (importante para accesibilidad)." }
-          - { label: "📅 Fecha y hora de INICIO", name: "fecha_inicio", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "DD/MM/YYYY", time_format: "HH:mm", hint: "El pop-up se activará automáticamente a partir de esta fecha y hora." }
-          - { label: "📅 Fecha y hora de FIN", name: "fecha_fin", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "DD/MM/YYYY", time_format: "HH:mm", hint: "El pop-up se ocultará automáticamente después de esta fecha y hora." }
-          - { label: "Enlace de WhatsApp (Botón)", name: "link_whatsapp", widget: "string", default: "https://wa.me/59169680009?text=Hola!%20Quiero%20informacion%20de%20la%20promo", hint: "URL completa de WhatsApp con mensaje predefinido." }
-          - { label: "Texto del Botón", name: "boton_texto", widget: "string", default: "Reclamar Promo por WhatsApp", hint: "Texto que aparece en el botón de llamada a la acción." }
+          - { label: "Descripción de la imagen (alt)", name: "titulo_alt", widget: "string", default: "Promoción Seiken Box" }
+          - { label: "📅 Fecha y hora de INICIO", name: "fecha_inicio", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "DD/MM/YYYY", time_format: "HH:mm" }
+          - { label: "📅 Fecha y hora de FIN", name: "fecha_fin", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss", date_format: "DD/MM/YYYY", time_format: "HH:mm" }
+          - { label: "Enlace de WhatsApp (Botón)", name: "link_whatsapp", widget: "string", default: "https://wa.me/59169680009?text=Hola!%20Quiero%20informacion%20de%20la%20promo" }
+          - { label: "Texto del Botón", name: "boton_texto", widget: "string", default: "CONTACTANOS" }
 
+  # ─── 2. WOD DE LA SEMANA ────────────────────────────────────────────────────
   - name: "wod"
     label: "💪 WOD de la Semana"
-    description: "Actualiza la programación del WOD del Sábado o de la semana que se muestra en el sitio."
+    description: "Actualiza la programación del WOD del Sábado."
     files:
       - name: "wod_config"
         label: "💪 WOD de esta semana"
         file: "public/content/wod.json"
         fields:
-          - { label: "Etiqueta de categoría", name: "categoria", widget: "string", default: "WOD del Sábado", hint: "Ej: 'WOD del Sábado' o 'WOD de la Semana'" }
-          - { label: "Fecha a mostrar en el sitio", name: "fecha_label", widget: "string", default: "Sáb 21 Jun", hint: "Texto libre, ej: 'Sáb 02 Ago'" }
-          - { label: "Horarios de clases", name: "fecha_sub", widget: "string", default: "08:30 · 09:30 · 10:30", hint: "Ej: '08:30 · 09:30 · 10:30'" }
+          - { label: "Etiqueta de categoría", name: "categoria", widget: "string", default: "WOD del Sábado" }
+          - { label: "Fecha a mostrar en el sitio", name: "fecha_label", widget: "string", default: "Sáb 21 Jun" }
+          - { label: "Horarios de clases", name: "fecha_sub", widget: "string", default: "08:30 · 09:30 · 10:30" }
           - label: "Bloques del Entrenamiento"
             name: "bloques"
             widget: "list"
             label_singular: "Bloque"
             summary: "{{fields.tag}}"
             fields:
-              - { label: "Etiqueta del bloque", name: "tag", widget: "string", hint: "Ej: 'Calentamiento · 10 min' o 'WOD · AMRAP 15 min'" }
-              - { label: "Estilo visual", name: "tipo", widget: "select", options: [{label: "Normal (fondo neutro)", value: "normal"}, {label: "Principal (fondo oscuro)", value: "main"}, {label: "Destacado (fondo verde)", value: "accent"}], default: "normal" }
-              - { label: "Título / Movimiento principal", name: "titulo", widget: "string", required: false, hint: "Ej: 'Back Squat', 'For Time'. Dejar vacío si no aplica." }
+              - { label: "Etiqueta del bloque", name: "tag", widget: "string", hint: "Ej: 'Calentamiento · 10 min'" }
+              - { label: "Estilo visual", name: "tipo", widget: "select", options: [{label: "Normal", value: "normal"}, {label: "Principal (oscuro)", value: "main"}, {label: "Destacado (verde)", value: "accent"}], default: "normal" }
+              - { label: "Título / Movimiento principal", name: "titulo", widget: "string", required: false }
               - label: "Ejercicios (uno por línea)"
                 name: "items"
                 widget: "list"
-                hint: "Cada elemento es una línea del WOD."
-              - { label: "Nota RX", name: "rx_note", widget: "string", required: false, hint: "Ej: 'RX · Scaled disponible'. Dejar vacío si no aplica." }
+              - { label: "Nota RX", name: "rx_note", widget: "string", required: false }
+
+  # ─── 3. TARIFAS / MEMBRESÍAS ────────────────────────────────────────────────
+  - name: "tarifas"
+    label: "💰 Tarifas y Membresías"
+    description: "Actualiza los precios de los planes de entrenamiento y nutrición."
+    files:
+      - name: "tarifas_config"
+        label: "💰 Planes y Precios"
+        file: "public/content/tarifas.json"
+        fields:
+          - label: "Planes de Entrenamiento Individual"
+            name: "planes_individuales"
+            widget: "list"
+            label_singular: "Plan"
+            summary: "{{fields.nombre}} — Bs. {{fields.precio}}"
+            fields:
+              - { label: "Nombre del plan", name: "nombre", widget: "string", hint: "Ej: Mensual, Trimestral, Semestral" }
+              - { label: "Precio (Bs.)", name: "precio", widget: "number", value_type: "int", hint: "Solo el número, sin 'Bs.'" }
+              - { label: "Unidad", name: "unidad", widget: "string", hint: "Ej: mes, trimestre, semestre" }
+              - { label: "Etiqueta adicional", name: "tag", widget: "string", required: false, hint: "Ej: '2 cuotas · Recomendado'. Dejar vacío si no aplica." }
+              - { label: "¿Mostrar como destacado?", name: "destacado", widget: "boolean", default: false, hint: "Resalta este plan con un borde verde." }
+          - label: "Planes Entrenamiento + Nutrición"
+            name: "planes_nutricion"
+            widget: "list"
+            label_singular: "Plan"
+            summary: "{{fields.nombre}} — Bs. {{fields.precio}}"
+            fields:
+              - { label: "Nombre del plan", name: "nombre", widget: "string" }
+              - { label: "Precio (Bs.)", name: "precio", widget: "number", value_type: "int" }
+              - { label: "Unidad", name: "unidad", widget: "string" }
+              - { label: "Etiqueta", name: "tag", widget: "string", required: false }
+              - { label: "Descripción corta", name: "descripcion", widget: "text", required: false }
+
+  # ─── 4. HORARIOS ────────────────────────────────────────────────────────────
+  - name: "horarios"
+    label: "🕐 Horarios de Clases"
+    description: "Actualiza los horarios de clases grupales y Open Box."
+    files:
+      - name: "horarios_config"
+        label: "🕐 Horarios"
+        file: "public/content/horarios.json"
+        fields:
+          - label: "Clases Grupales — Mañana"
+            name: "clases_manana"
+            widget: "list"
+            hint: "Horas de clases en formato HH:MM. Ej: 06:00"
+          - label: "Clases Grupales — Tarde"
+            name: "clases_tarde"
+            widget: "list"
+            hint: "Horas de clases en formato HH:MM. Ej: 18:30"
+          - { label: "Open Box Mañana (L-V)", name: "openbox_manana", widget: "string", hint: "Ej: 07:30–09:00 · 09:00–10:30" }
+          - { label: "Open Box Tarde (L-V)", name: "openbox_tarde", widget: "string", hint: "Ej: 15:30–17:00 · 17:00–18:30" }
+          - { label: "Sábado — Horario de Clases", name: "sabado_clases", widget: "string", hint: "Ej: 08:30 · 09:30 · 10:30" }
+          - { label: "Sábado — Solo Open Box", name: "sabado_openbox", widget: "string", hint: "Ej: 11:30–12:30" }
+          - { label: "Horario general L-V (para mostrar en Contacto)", name: "horario_semana", widget: "string", hint: "Ej: L–V · 06:00 – 21:00" }
+          - { label: "Horario general Sábado (para mostrar en Contacto)", name: "horario_sabado", widget: "string", hint: "Ej: Sáb · 08:00 – 12:00" }
+
+  # ─── 5. TESTIMONIOS ─────────────────────────────────────────────────────────
+  - name: "testimonios"
+    label: "⭐ Testimonios"
+    description: "Agrega y edita las reseñas de clientes que aparecen en el sitio."
+    files:
+      - name: "testimonios_config"
+        label: "⭐ Reseñas de Clientes"
+        file: "public/content/testimonios.json"
+        fields:
+          - { label: "Calificación promedio (ej: 4.9)", name: "calificacion", widget: "string", default: "4.9" }
+          - { label: "Total de reseñas en Google", name: "total_resenas", widget: "string", default: "14" }
+          - label: "Testimonios"
+            name: "testimonios"
+            widget: "list"
+            label_singular: "Testimonio"
+            summary: "{{fields.autor}}"
+            fields:
+              - { label: "Texto del testimonio", name: "texto", widget: "text" }
+              - { label: "Nombre del autor", name: "autor", widget: "string" }
+              - { label: "Fuente", name: "fuente", widget: "string", default: "Google · Local Guide", hint: "Ej: Google · Local Guide" }
+              - { label: "Iniciales (para el avatar)", name: "iniciales", widget: "string", hint: "Ej: AH (máx 2 letras)" }
+              - { label: "¿Mostrar como testimonio destacado (grande)?", name: "destacado", widget: "boolean", default: false }
+
+  # ─── 6. EQUIPO / COACHES ────────────────────────────────────────────────────
+  - name: "coaches"
+    label: "🏋️ Equipo de Coaches"
+    description: "Administra los coaches del equipo Seiken: fotos, nombres y especialidades."
+    files:
+      - name: "coaches_config"
+        label: "🏋️ Coaches"
+        file: "public/content/coaches.json"
+        fields:
+          - label: "Coaches"
+            name: "coaches"
+            widget: "list"
+            label_singular: "Coach"
+            summary: "{{fields.nombre}} — {{fields.rol}}"
+            fields:
+              - { label: "Nombre completo", name: "nombre", widget: "string" }
+              - { label: "Rol / Cargo", name: "rol", widget: "string", hint: "Ej: Head Coach, Coach, Coach · Nutrición" }
+              - { label: "Foto", name: "foto", widget: "image", hint: "Foto cuadrada del coach, mínimo 400×400px." }
+              - label: "Especialidades (etiquetas)"
+                name: "tags"
+                widget: "list"
+                hint: "Ej: Fuerza, WOD, Endurance. Máximo 3."
+              - { label: "Orden de aparición", name: "orden", widget: "number", value_type: "int", default: 1 }
+
+  # ─── 7. GALERÍA DE FOTOS ────────────────────────────────────────────────────
+  - name: "galeria"
+    label: "📸 Galería de Fotos"
+    description: "Administra las fotos del box que aparecen en la sección 'Inside the Box'."
+    files:
+      - name: "galeria_config"
+        label: "📸 Fotos del Box"
+        file: "public/content/galeria.json"
+        fields:
+          - label: "Fotos de la Galería"
+            name: "fotos"
+            widget: "list"
+            label_singular: "Foto"
+            summary: "{{fields.alt}}"
+            min: 1
+            max: 7
+            fields:
+              - { label: "Foto", name: "src", widget: "image", hint: "Sube una foto del box o de entrenamiento." }
+              - { label: "Descripción (alt)", name: "alt", widget: "string", hint: "Describe lo que muestra la foto (importante para SEO)." }
+              - { label: "Posición en la grilla", name: "posicion", widget: "select", options: ["g1","g2","g3","g4","g5","g6","g7"], default: "g1", hint: "g1 es el bloque grande destacado." }
+          - { label: "Instagram handle", name: "instagram_handle", widget: "string", default: "@seiken.box" }
+          - { label: "Stats de Instagram", name: "instagram_stats", widget: "string", default: "321 posts · 2.8K seguidores" }
+
+  # ─── 8. INFORMACIÓN DE CONTACTO ─────────────────────────────────────────────
+  - name: "contacto"
+    label: "📞 Contacto e Información"
+    description: "Actualiza el teléfono, email, dirección, redes sociales y el Google Maps del sitio."
+    files:
+      - name: "contacto_config"
+        label: "📞 Datos de Contacto"
+        file: "public/content/contacto.json"
+        fields:
+          - { label: "Número de WhatsApp (sin + ni espacios)", name: "whatsapp_numero", widget: "string", hint: "Ej: 59169680009 (con código de país)" }
+          - { label: "WhatsApp (texto a mostrar)", name: "whatsapp_texto", widget: "string", hint: "Ej: +591 69680009" }
+          - { label: "Email de contacto", name: "email", widget: "string" }
+          - { label: "Dirección", name: "direccion", widget: "string", hint: "Ej: Jaime Mendoza #508" }
+          - { label: "Ciudad y país", name: "ciudad", widget: "string", hint: "Ej: Sucre, Bolivia" }
+          - { label: "Link de Instagram", name: "instagram", widget: "string" }
+          - { label: "Link de Facebook", name: "facebook", widget: "string" }
+          - { label: "Horario L-V (texto)", name: "horario_semana", widget: "string", hint: "Ej: L–V · 06:00 – 21:00" }
+          - { label: "Horario Sábado (texto)", name: "horario_sabado", widget: "string", hint: "Ej: Sáb · 08:00 – 12:00" }
+          - { label: "URL de Google Maps Embed", name: "maps_embed", widget: "string", hint: "URL del iframe de Google Maps (no el link normal)." }

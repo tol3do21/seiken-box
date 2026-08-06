@@ -1,0 +1,12 @@
+﻿{
+  "planes_individuales": [
+    { "nombre": "Mensual", "precio": 295, "unidad": "mes", "tag": "", "destacado": false },
+    { "nombre": "Youth", "precio": 245, "unidad": "mes", "tag": "Menores 18", "destacado": false },
+    { "nombre": "Universitario", "precio": 265, "unidad": "mes", "tag": "Con credencial", "destacado": false },
+    { "nombre": "Trimestral", "precio": 845, "unidad": "trimestre", "tag": "2 cuotas · Recomendado", "destacado": true },
+    { "nombre": "Semestral", "precio": 1545, "unidad": "semestre", "tag": "3 cuotas", "destacado": false }
+  ],
+  "planes_nutricion": [
+    { "nombre": "Mensual", "precio": 465, "unidad": "mes", "tag": "by Nutrilara", "descripcion": "Plan alimenticio personalizado integrado a tu entrenamiento, con seguimiento continuo de Nutrilara." }
+  ]
+}

@@ -1,0 +1,13 @@
+name = "sveltia-cms-auth"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_DOMAINS = "seikenbox.com,seiken-box.pages.dev,localhost,127.0.0.1"
+
+# KV Namespace para almacenar la contraseña de administrador
+# Reemplaza el valor de 'id' con el ID real que devuelve el comando:
+# npx wrangler kv namespace create "CMS_STORAGE"
+[[kv_namespaces]]
+binding = "CMS_STORAGE"
+id = "b479de32baeb482cb8321dc4ae396e57"

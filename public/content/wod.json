@@ -10,7 +10,8 @@
       "items": [
         "800m trote suave",
         "2 rondas: 10 sentadillas, 10 inchworms, 10 shoulder pass-throughs"
-      ]
+      ],
+      "rx_note": ""
     },
     {
       "tag": "Fuerza · 20 min",
@@ -19,7 +20,8 @@
       "items": [
         "5 × 5 al 75–80% del 1RM",
         "Descanso 2–3 min entre series"
-      ]
+      ],
+      "rx_note": ""
     },
     {
       "tag": "WOD · AMRAP 15 min",
@@ -27,7 +29,7 @@
       "titulo": "For Time",
       "items": [
         "21 · 15 · 9",
-        "Thrusters (42.5 / 30 kg)",
+        "Thrusters (40 / 30 kg)",
         "Pull-ups"
       ],
       "rx_note": "RX · Scaled disponible"

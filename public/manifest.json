@@ -1,0 +1,23 @@
+{
+  "name": "Seiken Training Box",
+  "short_name": "Seiken Box",
+  "description": "El box líder de entrenamiento funcional y CrossFit en Sucre, Bolivia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "icons": [
+    {
+      "src": "/logos/logo_cuadrado_skn_transparente.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logos/logo_cuadrado_skn_transparente.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

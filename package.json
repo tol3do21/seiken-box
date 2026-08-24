@@ -1,0 +1,25 @@
+{
+  "name": "seiken_box",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"No build step required\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tol3do21/seiken-box.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tol3do21/seiken-box/issues"
+  },
+  "homepage": "https://github.com/tol3do21/seiken-box#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.3.3"
+  }
+}

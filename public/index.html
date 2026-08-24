@@ -5,22 +5,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="logos/logo_cuadrado_skn_transparente.png" />
-  <title>Seiken Training Box — Fitness Funcional en Sucre, Bolivia</title>
+  <title>Gimnasio en Sucre | CrossFit y Fitness Funcional — Seiken Box</title>
   <meta name="description"
-    content="Box de entrenamiento funcional en Sucre, Bolivia. Clases grupales, programación personalizada método Opex y nutrición con Nutrilara. Jaime Mendoza #508." />
+    content="El mejor gimnasio y box de entrenamiento funcional y CrossFit en Sucre, Bolivia. Clases grupales, método OPEX individualizado y nutrición con Nutrilara. ¡Prueba tu clase gratis!" />
   <meta name="keywords"
-    content="crossfit sucre, entrenamiento funcional sucre, gimnasio sucre, fit sucre, opex sucre, nutricion sucre, nutrilara sucre, seiken box, sucre bolivia" />
+    content="gimnasios en sucre, crossfit sucre, gimnasio sucre, funcional sucre, box sucre, entrenamiento funcional sucre, gym sucre bolivia, fitness sucre, seiken box, opex sucre" />
+  <meta name="author" content="Seiken Training Box" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+  <!-- Geo Tags para Posicionamiento Local en Sucre -->
+  <meta name="geo.region" content="BO-H" />
+  <meta name="geo.placename" content="Sucre" />
+  <meta name="geo.position" content="-19.0488183;-65.251221" />
+  <meta name="ICBM" content="-19.0488183, -65.251221" />
 
   <!-- Canonical Tag -->
   <link rel="canonical" href="https://seikenbox.com/" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:title" content="Seiken Training Box — Sucre, Bolivia" />
-  <meta property="og:description"
-    content="Fitness funcional, método Opex y comunidad real en Sucre. 5 años formando atletas." />
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:locale" content="es_BO" />
   <meta property="og:type" content="website" />
+  <meta property="og:title" content="Gimnasio en Sucre | CrossFit y Fitness Funcional — Seiken Box" />
+  <meta property="og:description"
+    content="El mejor box de entrenamiento funcional y CrossFit en Sucre. Clases grupales, método OPEX individualizado y nutrición con Nutrilara. Jaime Mendoza #508." />
   <meta property="og:url" content="https://seikenbox.com/" />
+  <meta property="og:site_name" content="Seiken Training Box" />
   <meta property="og:image" content="https://seikenbox.com/imagen/seiken-box-comunidad.jpg" />
+  <meta property="og:image:alt" content="Comunidad y atletas entrenando en Seiken Training Box Sucre" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gimnasio en Sucre | CrossFit y Fitness Funcional — Seiken Box" />
+  <meta name="twitter:description"
+    content="El box líder de entrenamiento funcional y CrossFit en Sucre, Bolivia. Clases grupales, método OPEX y nutrición con Nutrilara." />
+  <meta name="twitter:image" content="https://seikenbox.com/imagen/seiken-box-comunidad.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,28 +49,43 @@
   <!-- Tailwind CSS CDN -->
   <link rel="stylesheet" href="main.css" />
 
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
-  <!-- End Google Tag Manager -->
+  <!-- Google Analytics 4 (GA4 - gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNKG3Z8SPS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CNKG3Z8SPS', {
+      page_title: document.title,
+      page_location: window.location.href,
+      send_page_view: true
+    });
+  </script>
 
-  <!-- Schema Markup LocalBusiness -->
+  <!-- Schema Markup LocalBusiness / ExerciseGym para Google -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "HealthAndBeautyBusiness",
+    "@type": ["ExerciseGym", "SportsClub", "HealthAndBeautyBusiness"],
     "name": "Seiken Training Box",
-    "image": "https://seikenbox.com/imagen/seiken-box-comunidad.jpg",
-    "@id": "",
+    "alternateName": ["Seiken Box Sucre", "Seiken CrossFit Sucre", "Seiken Gym Sucre"],
+    "description": "El box líder de entrenamiento funcional y CrossFit en Sucre, Bolivia. Clases grupales, programación individualizada con método OPEX y asesoría nutricional con Nutrilara.",
+    "image": [
+      "https://seikenbox.com/imagen/seiken-box-comunidad.jpg",
+      "https://seikenbox.com/imagen/seiken-box-hero-atleta.jpg"
+    ],
+    "logo": "https://seikenbox.com/logos/logo_cuadrado_skn_transparente.png",
+    "@id": "https://seikenbox.com/#gym",
     "url": "https://seikenbox.com/",
     "telephone": "+59169680009",
+    "priceRange": "$$",
+    "currenciesAccepted": "BOB",
+    "paymentAccepted": "Efectivo, Transferencia Bancaria, QR",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Jaime Mendoza #508",
+      "streetAddress": "Av. Jaime Mendoza #508",
       "addressLocality": "Sucre",
+      "addressRegion": "Chuquisaca",
       "addressCountry": "BO"
     },
     "geo": {
@@ -77,18 +110,58 @@
     "sameAs": [
       "https://facebook.com/seiken.box",
       "https://instagram.com/seiken.box"
-    ]
+    ],
+    "areaServed": {
+      "@type": "City",
+      "name": "Sucre",
+      "containedInPlace": {
+        "@type": "Country",
+        "name": "Bolivia"
+      }
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios de Entrenamiento",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Fitness Funcional Grupal",
+            "description": "Entrenamiento funcional de alta intensidad en grupo para todos los niveles."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "CrossFit y Levantamiento Olímpico",
+            "description": "Clases técnicas de fuerza, halterofilia y gimnasia deportiva."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Diseño Individualizado (Método OPEX)",
+            "description": "Programación personalizada según evaluaciones biométricas y objetivos."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Nutrición Deportiva Nutrilara",
+            "description": "Planes de alimentación adaptados a tu rendimiento atlético y salud."
+          }
+        }
+      ]
+    }
   }
   </script>
 </head>
 
 <body>
-
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
 
   <!-- NAV -->
   <nav class="nav">
@@ -1614,6 +1687,34 @@
           if (ctaWa) ctaWa.href = waLink;
           if (ctaEmail && d.email) { ctaEmail.href = 'mailto:' + d.email; ctaEmail.textContent = '✉ ' + d.email; }
         }).catch(function(){});
+
+      /* ---- 9. SEGUIMIENTO DE EVENTOS / CONVERSIONES (GA4) ---- */
+      function trackGA(eventName, params) {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', eventName, params || {});
+        }
+      }
+
+      // Clics en WhatsApp (Conversión Principal)
+      document.addEventListener('click', function(e) {
+        var waAnchor = e.target.closest('a[href*="wa.me"], a[data-wa]');
+        if (waAnchor) {
+          trackGA('generate_lead', {
+            event_category: 'Conversión WhatsApp',
+            event_label: waAnchor.textContent.trim() || 'WhatsApp CTA',
+            link_url: waAnchor.href
+          });
+        }
+
+        // Clics en CTAs de Clase de Prueba / Empezar
+        var ctaTrial = e.target.closest('.cta, a[href="#contacto"], a[href="#tarifas"]');
+        if (ctaTrial && !waAnchor) {
+          trackGA('select_content', {
+            content_type: 'CTA Button',
+            item_id: ctaTrial.textContent.trim()
+          });
+        }
+      });
 
     });
   </script>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documento de Entrega — TLD Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* ─── TOKENS (TLD Studio) ──────────────────────────────────────────── */
+:root {
+  --black:   #0C0C0B;
+  --white:   #FAFAF8;
+  --amber:   #C8893A;
+  --surface: #F3F1EE;
+  --muted:   #9C9891;
+  --border:  #E2DED8;
+  --text:    #2A2926;
+  --serif:   'DM Serif Display', Georgia, serif;
+  --sans:    'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--sans); background: #333; display: flex; justify-content: center; padding: 20px; }
+
+/* ─── PAGE SYSTEM (A4) ──────────────────────── */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 20mm;
+  background: var(--white);
+  color: var(--text);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── TYPOGRAPHY ──────────────────────────────────────── */
+.eyebrow {
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 5mm;
+}
+.title-main {
+  font-family: var(--serif);
+  font-size: 34pt;
+  line-height: 1.1;
+  color: var(--black);
+  margin-bottom: 8mm;
+  letter-spacing: -0.02em;
+}
+.title-sec {
+  font-family: var(--sans);
+  font-size: 14pt;
+  font-weight: 600;
+  color: var(--black);
+  margin-top: 10mm;
+  margin-bottom: 4mm;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.t-body {
+  font-size: 10pt;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 5mm;
+}
+
+/* ─── LOGOS & HEADER ────────────────────────────────────────────── */
+.header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15mm;
+}
+.logo-tld {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 16pt;
+  letter-spacing: -0.03em;
+  color: var(--black);
+}
+.logo-tld .sub { font-weight: 300; color: var(--muted); }
+.header-meta {
+  text-align: right;
+  font-size: 8pt;
+  color: var(--muted);
+  line-height: 1.5;
+  font-weight: 500;
+}
+.client-logo-box {
+  background: var(--black);
+  padding: 3mm;
+  display: inline-block;
+  margin-bottom: 5mm;
+}
+.client-logo {
+  height: 25mm;
+  object-fit: contain;
+}
+
+/* ─── COMPONENTS ────────────────────────────────────────────── */
+.list {
+  padding-left: 5mm;
+  margin-bottom: 6mm;
+}
+.list li {
+  font-size: 10pt;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 2mm;
+}
+.list li strong {
+  color: var(--black);
+  font-weight: 600;
+}
+.box-highlight {
+  background: var(--surface);
+  padding: 6mm;
+  border-left: 2px solid var(--amber);
+  margin-bottom: 6mm;
+}
+.box-highlight p { margin: 0; font-size: 9.5pt; color: var(--black); font-weight: 500; }
+
+a {
+  color: var(--amber);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ─── SIGNATURE & FOOTER ─────────────────────────────────────── */
+.signatures {
+  margin-top: 15mm;
+  display: flex;
+  justify-content: space-between;
+}
+.sig-block {
+  width: 60mm;
+}
+.sig-line {
+  border-bottom: 1px solid var(--black);
+  margin-bottom: 2mm;
+  height: 15mm;
+}
+.sig-name {
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--black);
+}
+.sig-title {
+  font-size: 8pt;
+  color: var(--muted);
+}
+.pfooter {
+  margin-top: auto;
+  padding-top: 4mm;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 8pt;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+@media print {
+  body { background: none; padding: 0; }
+  .page { box-shadow: none; margin: 0; width: 100%; min-height: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <!-- HEADER -->
+  <div class="header-wrap">
+    <div>
+      <div class="logo-tld">TLD<span class="sub">Studio.</span></div>
+    </div>
+    <div class="header-meta">
+      DOCUMENTO DE ENTREGA DE SISTEMA<br>
+      REF: SKN-2026-FINAL<br>
+      AGOSTO 2026
+    </div>
+  </div>
+
+  <div class="client-logo-box">
+    <img src="public/logos/logo_skn_transparente.png" alt="Seiken Training Box Logo" class="client-logo">
+  </div>
+
+  <div class="eyebrow">Documentación Oficial</div>
+  <h1 class="title-main">Presentación del Proyecto Web &amp; Manual de Sistema</h1>
+  
+  <p class="t-body">
+    El presente documento formaliza la entrega y puesta en marcha de la nueva infraestructura digital de <strong>Seiken Training Box</strong>. Diseñada arquitectónicamente por <strong>TLD Studio</strong>, la plataforma se enfoca en reflejar la alta calidad del servicio (Método Opex), optimizar la velocidad de carga a nivel global y dotar a la administración de completa autonomía mediante un Gestor de Contenidos a medida.
+  </p>
+
+  <h2 class="title-sec">
+    01. Enlaces e Infraestructura
+  </h2>
+  <div class="box-highlight">
+    <p>El sitio opera actualmente bajo un dominio de <i>Preview</i>. Una vez adquirido y apuntado el dominio final, la transición será automática y sin interrupciones de servicio.</p>
+  </div>
+  <ul class="list">
+    <li><strong>Sitio Web Oficial:</strong> <a href="https://seikenbox.com/" target="_blank">https://seikenbox.com/</a></li>
+    <li><strong>Panel de Administración:</strong> <a href="https://seikenbox.com/admin/" target="_blank">https://seikenbox.com/admin/</a></li>
+    <li><strong>Infraestructura Base:</strong> Desplegado sobre la red Edge de Cloudflare (CDN Global) garantizando protección contra ataques DDoS y máxima velocidad.</li>
+    <li><strong>SEO & Analítica:</strong> Configuración completa de metadatos para posicionamiento orgánico en Sucre (CrossFit, Gimnasio, Funcional) e integración lista para Google Analytics 4 (GA4).</li>
+  </ul>
+
+  <h2 class="title-sec">
+    02. Manual de Administración (CMS)
+  </h2>
+  <p class="t-body">
+    El panel de administración permite al equipo interno gestionar la información crítica del negocio sin conocimientos previos de programación. El acceso se realiza mediante la ruta <code>/admin/</code> utilizando las credenciales asignadas.
+  </p>
+  
+  <ul class="list">
+    <li><strong>Pop-up Promocional:</strong> Activa ventanas emergentes con diseños (flyers), define tiempos de publicación automáticos y configura un enlace directo de conversión a WhatsApp.</li>
+    <li><strong>WOD de la Semana:</strong> Programa las sesiones de fin de semana detallando los bloques de trabajo (calentamiento, fuerza, WOD) y los horarios específicos de ejecución.</li>
+    <li><strong>Tarifas y Membresías:</strong> Control sobre todos los precios, actualización de cuotas, etiquetas comerciales (ej. "Recomendado") y personalización del Plan Opex Individual.</li>
+    <li><strong>Horarios de Clases:</strong> Modificación de la estructura de clases grupales y Open Box.</li>
+    <li><strong>Equipo de Coaches:</strong> Carga de material fotográfico corporativo, ajuste de perfiles profesionales y actualización de especialidades.</li>
+    <li><strong>Galería de Fotos (Inside the Box):</strong> Actualización de las imágenes del área de entrenamiento, permitiendo rotar fotografías dinámicamente.</li>
+    <li><strong>Testimonios e Información de Contacto:</strong> Ajuste de la reputación digital (Google Reviews), números de contacto y direcciones físicas.</li>
+  </ul>
+
+  <div class="box-highlight">
+    <p>IMPORTANTE: Una vez realizados los cambios en el panel, se debe hacer clic en "Guardar". Los servidores compilarán la nueva información y el sitio se actualizará globalmente en un periodo de 2 minutos.</p>
+  </div>
+
+  <!-- FIRMAS -->
+  <div class="signatures">
+    <div class="sig-block">
+      <div class="sig-line"></div>
+      <div class="sig-name">Ing. Andrés Toledo</div>
+      <div class="sig-title">Diseño y Desarrollo de Software<br>TLD Studio.</div>
+    </div>
+    <div class="sig-block">
+      <div class="sig-line"></div>
+      <div class="sig-name">Esteban Urioste</div>
+      <div class="sig-title">Propietario / Head Coach<br>Seiken Training Box</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="pfooter">
+    <div>Realizado por TLD Studio.</div>
+    <div>Página 1 de 1</div>
+  </div>
+</div>
+
+</body>
+</html>

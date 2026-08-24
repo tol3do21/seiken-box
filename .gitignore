@@ -11,5 +11,10 @@ Desktop.ini
 # Backups and previous code
 codigo-previo/
 
+# Dependencies & Binaries
+node_modules/
+*.exe
+
 # Cloudflare Wrangler cache
 .wrangler/
+

@@ -2612,6 +2612,25 @@
       text-transform: uppercase
     }
 
+    /* ── Firma de Autoría: TLD Studio (Opción A) ── */
+    .tld-credit-link {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(243, 239, 230, 0.30);
+      padding-bottom: 1px;
+      transition: color 0.22s ease, border-color 0.22s ease, text-shadow 0.22s ease
+    }
+
+    .tld-credit-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      text-shadow: 0 0 12px rgba(0, 204, 0, 0.35)
+    }
+
+    .tld-dot {
+      color: var(--accent)
+    }
+
     /* ============ HERO ANIMATIONS ============ */
     @keyframes heroWordUp {
       from {

@@ -60,11 +60,26 @@
     content="El box líder de entrenamiento funcional y CrossFit en Sucre, Bolivia. Clases grupales, método OPEX y nutrición con Nutrilara." />
   <meta name="twitter:image" content="https://seikenbox.com/imagen/seiken-box-comunidad.jpg" />
 
+  <!-- Preload LCP Hero Image con alta prioridad -->
+  <link rel="preload" as="image" href="imagen/seiken-box-hero-atleta.webp" type="image/webp" fetchpriority="high" />
+
+  <!-- Preconnect & Asynchronous Google Fonts (Non-render-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" />
+  <link
     href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet" />
+  </noscript>
 
   <!-- Tailwind CSS CDN -->
   <link rel="stylesheet" href="main.css" />
@@ -187,8 +202,11 @@
   <nav class="nav">
     <div class="container nav-inner">
       <div class="brand">
-        <img src="logos/logo_skn_transparente.png" alt="Seiken Training Box Logo"
-          style="height:56px;width:auto;object-fit:contain">
+        <picture>
+          <source srcset="logos/logo_skn_transparente.webp" type="image/webp" />
+          <img src="logos/logo_skn_transparente.png" alt="Seiken Training Box Logo" width="170" height="56"
+            style="height:56px;width:auto;object-fit:contain">
+        </picture>
       </div>
       <div class="nav-links">
         <a href="#manifiesto">Manifiesto</a>
@@ -220,8 +238,11 @@
   <!-- HERO -->
   <header class="hero">
     <div class="hero-backdrop">
-      <img src="imagen/seiken-box-hero-atleta.jpg"
-        alt="Atleta de Seiken Box ejecutando una parada de manos en las instalaciones de Sucre" fetchpriority="high" />
+      <picture>
+        <source srcset="imagen/seiken-box-hero-atleta.webp" type="image/webp" />
+        <img src="imagen/seiken-box-hero-atleta.jpg"
+          alt="Atleta de Seiken Box ejecutando una parada de manos en las instalaciones de Sucre" fetchpriority="high" decoding="async" />
+      </picture>
     </div>
     <div class="hero-flash" aria-hidden="true"></div>
 
@@ -1111,9 +1132,6 @@
   </div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
     // Check if review mode is requested or active
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('review')) {
@@ -1123,6 +1141,12 @@
     const isReviewActive = localStorage.getItem('review_mode') === 'true';
 
     if (isReviewActive) {
+      Promise.all([
+        import("https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js")
+      ]).then(([fbApp, fbStore]) => {
+        const { initializeApp } = fbApp;
+        const { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp } = fbStore;
       // Show the review FAB
       const fab = document.getElementById('rv-fab');
       if (fab) fab.style.display = 'flex';
@@ -1242,6 +1266,7 @@
           else if (active) off();
         }
       });
+      }).catch(function (err) { console.error('Error cargando módulo de revisión:', err); });
     }
   </script>
 

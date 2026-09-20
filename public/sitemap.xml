@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://seikenbox.com/</loc>
-    <lastmod>2026-09-12</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <!-- Geotargeting: solo versión en español de Bolivia -->
+    <xhtml:link
+      rel="alternate"
+      hreflang="es-BO"
+      href="https://seikenbox.com/" />
+    <xhtml:link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://seikenbox.com/" />
   </url>
 </urlset>

@@ -33,9 +33,10 @@
   <meta name="ICBM" content="-19.0488183, -65.251221" />
 
   <!-- Canonical & Geotargeting Idiomático -->
+  <!-- Nota: hreflang apunta exclusivamente a Bolivia (es-BO). -->
+  <!-- x-default apunta al mismo URL para evitar distribución geográfica indiscriminada. -->
   <link rel="canonical" href="https://seikenbox.com/" />
   <link rel="alternate" hreflang="es-BO" href="https://seikenbox.com/" />
-  <link rel="alternate" hreflang="es" href="https://seikenbox.com/" />
   <link rel="alternate" hreflang="x-default" href="https://seikenbox.com/" />
 
   <!-- Open Graph / Facebook / WhatsApp -->
@@ -93,7 +94,11 @@
     gtag('config', 'G-CNKG3Z8SPS', {
       page_title: document.title,
       page_location: window.location.href,
-      send_page_view: true
+      send_page_view: true,
+      // Filtro de bots conocidos para datos más limpios
+      traffic_type: (navigator.webdriver || !navigator.languages || navigator.languages.length === 0) ? 'bot' : 'organic',
+      // Señal geográfica para GA4: mercado objetivo Bolivia
+      country: 'BO'
     });
   </script>
 
@@ -121,6 +126,7 @@
       "streetAddress": "Av. Jaime Mendoza #508",
       "addressLocality": "Sucre",
       "addressRegion": "Chuquisaca",
+      "postalCode": "0000",
       "addressCountry": "BO"
     },
     "geo": {

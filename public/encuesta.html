@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encuesta de Satisfacción — Seiken Training Box</title>
+  <meta name="description" content="Ayúdanos a mejorar tu experiencia en Seiken Training Box. Tu opinión sincera fortalece nuestra comunidad." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="logos/logo_cuadrado_skn_transparente.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="logos/logo_cuadrado_skn_transparente.png" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- Google Fonts: Archivo, Archivo Black, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#00E676',
+              light: '#33ff8f',
+              dark: '#00b35c',
+              glow: 'rgba(0, 230, 118, 0.35)'
+            },
+            surface: {
+              900: '#0a0a0a',
+              800: '#121212',
+              700: '#181818',
+              600: '#222222',
+              border: '#2a2a2a'
+            }
+          },
+          fontFamily: {
+            display: ['"Archivo Black"', 'sans-serif'],
+            sans: ['Archivo', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Efecto Glow de Fondo */
+    .bg-ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle at 50% 10%, rgba(0, 230, 118, 0.08) 0%, rgba(10, 10, 10, 0) 65%);
+    }
+
+    /* Estrellas interactivas */
+    .star-btn {
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s ease;
+    }
+    .star-btn:hover {
+      transform: scale(1.22);
+    }
+    .star-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Opciones tipo píldora */
+    .pill-radio:checked + label {
+      background-color: rgba(0, 230, 118, 0.15);
+      border-color: #00E676;
+      color: #00E676;
+      box-shadow: 0 0 16px rgba(0, 230, 118, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-surface-900 text-gray-200 font-sans min-h-screen relative flex flex-col items-center justify-start p-4 sm:p-6 md:p-10 selection:bg-brand selection:text-black">
+
+  <div class="bg-ambient-glow"></div>
+
+  <!-- Contenedor Principal -->
+  <main class="w-full max-w-2xl relative z-10 flex flex-col items-center">
+
+    <!-- Header con Logo Seiken -->
+    <header class="text-center mb-8 flex flex-col items-center">
+      <a href="https://seikenbox.com/" class="inline-block transition hover:opacity-90 hover:scale-105 duration-200">
+        <img src="logos/logo_skn_transparente.webp" onerror="this.onerror=null; this.src='logos/logo_cuadrado_skn_transparente.png';" alt="Seiken Training Box Logo" class="h-16 sm:h-20 w-auto object-contain mx-auto mb-3" />
+      </a>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand/30 bg-brand/10 text-brand text-xs font-mono uppercase tracking-wider mb-2">
+        <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
+        Tu opinión nos hace más fuertes
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-display uppercase tracking-tight text-white">
+        Encuesta de Satisfacción
+      </h1>
+      <p class="text-gray-400 text-sm sm:text-base mt-1 max-w-md">
+        Queremos que tu experiencia en el box sea de nivel mundial. Responder te tomará menos de 60 segundos.
+      </p>
+    </header>
+
+    <!-- TARJETA DEL FORMULARIO -->
+    <div id="survey-card" class="w-full bg-surface-800/90 backdrop-blur-md border border-surface-border rounded-2xl p-6 sm:p-8 shadow-2xl shadow-black/80 transition-all duration-300">
+      
+      <form id="seiken-survey-form" class="space-y-8" onsubmit="handleSurveySubmit(event)">
+
+        <!-- 1. IDENTIFICACIÓN Y PERFIL -->
+        <section class="space-y-4">
+          <div class="flex items-center justify-between border-b border-surface-border/60 pb-2">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-brand font-semibold flex items-center gap-2">
+              <span class="text-gray-500">01 //</span> Tus Datos (Opcional)
+            </h2>
+            <span class="text-[11px] text-gray-500 font-mono">100% Confidencial</span>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <label for="athlete-name" class="block text-xs font-medium text-gray-300 mb-1">Tu Nombre o Apodo:</label>
+              <div class="relative">
+                <input type="text" id="athlete-name" name="nombre" placeholder="Ej: Juan Pérez" class="w-full bg-surface-700/80 border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition" />
+              </div>
+            </div>
+
+            <!-- Checkbox Anónimo Rápido -->
+            <label class="flex items-center gap-2.5 cursor-pointer text-xs text-gray-400 select-none">
+              <input type="checkbox" id="is-anonymous" onchange="toggleAnonymous(this)" class="w-4 h-4 rounded border-gray-700 bg-surface-700 text-brand focus:ring-0 focus:ring-offset-0 cursor-pointer" />
+              <span>Prefiero que mi respuesta sea totalmente anónima</span>
+            </label>
+
+            <!-- ¿Cuánto tiempo entrenas en Seiken? -->
+            <div class="pt-2">
+              <label class="block text-xs font-medium text-gray-300 mb-2">¿Cuánto tiempo llevas en Seiken Box?</label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div>
+                  <input type="radio" name="tiempo_box" id="t-1" value="Menos de 1 mes" class="hidden pill-radio" checked />
+                  <label for="t-1" class="block text-center text-xs py-2 px-1 rounded-lg border border-surface-border bg-surface-700/50 cursor-pointer font-medium hover:border-gray-500 transition">
+                    &lt; 1 mes
+                  </label>
+                </div>
+                <div>
+                  <input type="radio" name="tiempo_box" id="t-2" value="1 a 6 meses" class="hidden pill-radio" />
+                  <label for="t-2" class="block text-center text-xs py-2 px-1 rounded-lg border border-surface-border bg-surface-700/50 cursor-pointer font-medium hover:border-gray-500 transition">
+                    1 - 6 meses
+                  </label>
+                </div>
+                <div>
+                  <input type="radio" name="tiempo_box" id="t-3" value="6 meses a 1 año" class="hidden pill-radio" />
+                  <label for="t-3" class="block text-center text-xs py-2 px-1 rounded-lg border border-surface-border bg-surface-700/50 cursor-pointer font-medium hover:border-gray-500 transition">
+                    6m - 1 año
+                  </label>
+                </div>
+                <div>
+                  <input type="radio" name="tiempo_box" id="t-4" value="Más de 1 año" class="hidden pill-radio" />
+                  <label for="t-4" class="block text-center text-xs py-2 px-1 rounded-lg border border-surface-border bg-surface-700/50 cursor-pointer font-medium hover:border-gray-500 transition">
+                    + 1 año
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coach habitual -->
+            <div class="pt-1">
+              <label for="coach-select" class="block text-xs font-medium text-gray-300 mb-1">¿Con qué Coach o programa entrenas más?</label>
+              <select id="coach-select" name="coach_frecuente" class="w-full bg-surface-700/80 border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition">
+                <option value="Varios / Turno rotativo">Varios / No tengo uno fijo</option>
+                <option value="Esteban Urioste (Head Coach / Opex)">Esteban Urioste (Head Coach / Opex)</option>
+                <option value="Gabriel">Gabriel</option>
+                <option value="Carolina">Carolina</option>
+                <option value="Jairo">Jairo</option>
+                <option value="Lara (Nutrilara / Nutrición)">Lara (Nutrilara / Nutrición)</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. CALIFICACIÓN GENERAL (ESTRELLAS INTERACTIVAS) -->
+        <section class="space-y-4 pt-2">
+          <div class="flex items-center justify-between border-b border-surface-border/60 pb-2">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-brand font-semibold flex items-center gap-2">
+              <span class="text-gray-500">02 //</span> Calificación General
+            </h2>
+            <span class="text-[11px] text-brand font-mono font-bold">* Obligatorio</span>
+          </div>
+
+          <div class="bg-surface-700/40 border border-surface-border/70 rounded-xl p-5 text-center flex flex-col items-center">
+            <p class="text-sm sm:text-base font-medium text-white mb-3">
+              ¿Cómo calificarías tu experiencia general en Seiken Box?
+            </p>
+
+            <!-- Contenedor Estrellas -->
+            <div id="stars-container" class="flex items-center gap-2 sm:gap-3 py-1" onmouseleave="resetStarHover()">
+              <button type="button" class="star-btn text-3xl sm:text-4xl text-gray-600 focus:outline-none" data-score="1" onmouseover="previewStars(1)" onclick="selectStars(1)" aria-label="1 estrella">★</button>
+              <button type="button" class="star-btn text-3xl sm:text-4xl text-gray-600 focus:outline-none" data-score="2" onmouseover="previewStars(2)" onclick="selectStars(2)" aria-label="2 estrellas">★</button>
+              <button type="button" class="star-btn text-3xl sm:text-4xl text-gray-600 focus:outline-none" data-score="3" onmouseover="previewStars(3)" onclick="selectStars(3)" aria-label="3 estrellas">★</button>
+              <button type="button" class="star-btn text-3xl sm:text-4xl text-gray-600 focus:outline-none" data-score="4" onmouseover="previewStars(4)" onclick="selectStars(4)" aria-label="4 estrellas">★</button>
+              <button type="button" class="star-btn text-3xl sm:text-4xl text-gray-600 focus:outline-none" data-score="5" onmouseover="previewStars(5)" onclick="selectStars(5)" aria-label="5 estrellas">★</button>
+            </div>
+
+            <!-- Campo Oculto para el Score -->
+            <input type="hidden" name="calificacion_general" id="rating-score" value="5" required />
+
+            <!-- Etiqueta Dinámica del Rating -->
+            <div id="rating-label" class="mt-2 text-xs font-mono font-bold uppercase tracking-wider text-brand">
+              ⭐⭐⭐⭐⭐ ¡Excelente, me encanta!
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. EVALUACIÓN DE ÁREAS ESPECÍFICAS -->
+        <section class="space-y-4 pt-2">
+          <div class="border-b border-surface-border/60 pb-2">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-brand font-semibold flex items-center gap-2">
+              <span class="text-gray-500">03 //</span> Evaluación por Áreas
+            </h2>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Calidad e instrucción de Coaches -->
+            <div class="bg-surface-700/30 border border-surface-border/60 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <p class="text-xs font-medium text-white">Atención y corrección de los Coaches</p>
+                <p class="text-[11px] text-gray-400">¿Te guían y corrigen tu técnica durante el WOD?</p>
+              </div>
+              <div class="flex gap-1.5 self-end sm:self-center">
+                <input type="radio" name="area_coaches" id="c-1" value="A mejorar" class="hidden pill-radio" />
+                <label for="c-1" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">A mejorar</label>
+                <input type="radio" name="area_coaches" id="c-2" value="Buena" class="hidden pill-radio" />
+                <label for="c-2" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">Buena</label>
+                <input type="radio" name="area_coaches" id="c-3" value="Excelente" class="hidden pill-radio" checked />
+                <label for="c-3" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">Excelente</label>
+              </div>
+            </div>
+
+            <!-- Limpieza y equipamiento -->
+            <div class="bg-surface-700/30 border border-surface-border/60 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <p class="text-xs font-medium text-white">Limpieza y estado del Equipamiento</p>
+                <p class="text-[11px] text-gray-400">Barras, discos, remos, magnesio y baños</p>
+              </div>
+              <div class="flex gap-1.5 self-end sm:self-center">
+                <input type="radio" name="area_limpieza" id="l-1" value="A mejorar" class="hidden pill-radio" />
+                <label for="l-1" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">A mejorar</label>
+                <input type="radio" name="area_limpieza" id="l-2" value="Buena" class="hidden pill-radio" />
+                <label for="l-2" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">Buena</label>
+                <input type="radio" name="area_limpieza" id="l-3" value="Excelente" class="hidden pill-radio" checked />
+                <label for="l-3" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">Excelente</label>
+              </div>
+            </div>
+
+            <!-- Música, comunidad y puntualidad -->
+            <div class="bg-surface-700/30 border border-surface-border/60 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <p class="text-xs font-medium text-white">Ambiente, Música y Puntualidad</p>
+                <p class="text-[11px] text-gray-400">Energía de la clase y cumplimiento de horarios</p>
+              </div>
+              <div class="flex gap-1.5 self-end sm:self-center">
+                <input type="radio" name="area_ambiente" id="a-1" value="A mejorar" class="hidden pill-radio" />
+                <label for="a-1" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">A mejorar</label>
+                <input type="radio" name="area_ambiente" id="a-2" value="Buena" class="hidden pill-radio" />
+                <label for="a-2" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">Buena</label>
+                <input type="radio" name="area_ambiente" id="a-3" value="Excelente" class="hidden pill-radio" checked />
+                <label for="a-3" class="text-xs px-2.5 py-1.5 rounded border border-surface-border bg-surface-700/50 cursor-pointer hover:border-gray-400">Excelente</label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. PREGUNTAS ABIERTAS (FEEDBACK CUALITATIVO) -->
+        <section class="space-y-4 pt-2">
+          <div class="border-b border-surface-border/60 pb-2">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-brand font-semibold flex items-center gap-2">
+              <span class="text-gray-500">04 //</span> En tus Propias Palabras
+            </h2>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <label for="feedback-best" class="block text-xs font-medium text-gray-300 mb-1">
+                ¿Qué es lo que más te gusta de entrenar en Seiken?
+              </label>
+              <textarea id="feedback-best" name="lo_mejor" rows="2" placeholder="Ej: La exigencia de los WODs, la buena vibra de los compañeros, el método Opex..." class="w-full bg-surface-700/80 border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition"></textarea>
+            </div>
+
+            <div>
+              <label for="feedback-improve" class="block text-xs font-medium text-gray-300 mb-1">
+                Si pudieras mejorar o agregar algo al box, ¿qué sería?
+              </label>
+              <textarea id="feedback-improve" name="sugerencia_mejora" rows="2" placeholder="Ej: Me gustaría más horarios de Open Box, música variada, talleres de levantamiento..." class="w-full bg-surface-700/80 border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- BOTÓN DE ENVÍO -->
+        <div class="pt-4">
+          <button type="submit" id="submit-btn" class="w-full bg-brand hover:bg-brand-light text-black font-display text-sm tracking-wider uppercase py-3.5 px-6 rounded-xl font-black shadow-lg shadow-brand/20 hover:shadow-brand/40 hover:-translate-y-0.5 active:translate-y-0 transition duration-200 flex items-center justify-center gap-2 cursor-pointer">
+            <span id="btn-text">Enviar Evaluación</span>
+            <svg id="btn-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            <span id="btn-spinner" class="hidden w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
+          </button>
+          <p class="text-center text-[11px] text-gray-500 mt-2 font-mono">
+            Tus datos se procesan de forma segura para la mejora continua del Box.
+          </p>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- ============================================================
+         PANTALLAS DE RESULTADO DINÁMICO (REVIEW GATING INTELIGENTE)
+         ============================================================ -->
+
+    <!-- CASO A: SATISFECHO (4 O 5 ESTRELLAS) -> REVIEW GATING HACIA GOOGLE MAPS -->
+    <div id="result-success-high" class="hidden w-full bg-surface-800/95 border border-brand/40 rounded-2xl p-6 sm:p-10 text-center shadow-2xl shadow-brand/10">
+      <div class="w-16 h-16 rounded-full bg-brand/15 text-brand flex items-center justify-center mx-auto mb-4 text-3xl">
+        ⚡
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-display uppercase tracking-tight text-white mb-2">
+        ¡Gracias por Ser Parte del Box!
+      </h2>
+      <p class="text-gray-300 text-sm sm:text-base max-w-lg mx-auto mb-6">
+        Tu energía y compromiso hacen que esta comunidad sea única en Sucre. Nos alegra enormemente que estés disfrutando tus entrenamientos.
+      </p>
+
+      <!-- TARJETA CTA GOOGLE MAPS -->
+      <div class="bg-surface-700/60 border border-brand/30 rounded-xl p-5 max-w-md mx-auto mb-6 text-left">
+        <div class="flex items-center gap-2 mb-2 text-brand text-xs font-mono font-bold uppercase tracking-wider">
+          <span>★★★★★</span> Apóyanos en Google
+        </div>
+        <p class="text-xs text-gray-300 mb-4 leading-relaxed">
+          ¿Nos regalarías 30 segundos? Copia tu opinión y califícanos en Google Maps para ayudar a que más personas en Sucre descubran el método Seiken:
+        </p>
+        <a id="btn-google-maps" href="https://maps.google.com/?q=Seiken+Training+Box+Sucre" target="_blank" rel="noopener noreferrer" class="w-full bg-brand hover:bg-brand-light text-black font-display text-xs tracking-wider uppercase py-3 px-4 rounded-lg font-black flex items-center justify-center gap-2 shadow-md shadow-brand/20 transition hover:scale-[1.02]">
+          <span>Dejar Reseña en Google Maps</span>
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </a>
+      </div>
+
+      <a href="https://seikenbox.com/" class="inline-block text-xs font-mono text-gray-400 hover:text-brand transition">
+        ← Volver al sitio web principal
+      </a>
+    </div>
+
+    <!-- CASO B: FEEDBACK CON CRÍTICAS (1, 2 O 3 ESTRELLAS) -> ATENCIÓN PRIVADA -->
+    <div id="result-success-low" class="hidden w-full bg-surface-800/95 border border-yellow-500/40 rounded-2xl p-6 sm:p-10 text-center shadow-2xl">
+      <div class="w-16 h-16 rounded-full bg-yellow-500/15 text-yellow-400 flex items-center justify-center mx-auto mb-4 text-3xl">
+        🛡️
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-display uppercase tracking-tight text-white mb-2">
+        Gracias por tu Sinceridad
+      </h2>
+      <p class="text-gray-300 text-sm sm:text-base max-w-lg mx-auto mb-6">
+        En Seiken Training Box nos tomamos muy en serio cada detalle. Tu respuesta ya ha sido registrada para que el equipo tome acciones correctivas inmediatas.
+      </p>
+
+      <div class="bg-surface-700/60 border border-surface-border rounded-xl p-5 max-w-md mx-auto mb-6 text-left">
+        <p class="text-xs text-gray-300 mb-4 leading-relaxed">
+          Si deseas conversar sobre algún detalle puntual directamente con Esteban Urioste (Head Coach) para solucionarlo hoy mismo, puedes escribirle por WhatsApp:
+        </p>
+        <a id="btn-whatsapp-direct" href="https://wa.me/59169680009?text=Hola%20Esteban,%20acabo%20de%20llenar%20la%20encuesta%20de%20Seiken%20y%20quisiera%20conversar%20sobre%20un%20punto%20de%20mejora" target="_blank" rel="noopener noreferrer" class="w-full bg-[#25D366] hover:bg-[#20ba59] text-black font-display text-xs tracking-wider uppercase py-3 px-4 rounded-lg font-black flex items-center justify-center gap-2 shadow-md transition hover:scale-[1.02]">
+          <span>Escribir por WhatsApp al Head Coach</span>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
+        </a>
+      </div>
+
+      <a href="https://seikenbox.com/" class="inline-block text-xs font-mono text-gray-400 hover:text-brand transition">
+        ← Volver al sitio web principal
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
+      <p>© 2026 Seiken Training Box · Jaime Mendoza #508, Sucre - Bolivia</p>
+    </footer>
+
+  </main>
+
+  <!-- LÓGICA JAVASCRIPT VANILLA -->
+  <script>
+    /* ============================================================
+       CONFIGURACIÓN DE GOOGLE SHEETS
+       Pega aquí la URL de tu Google Apps Script una vez desplegado.
+       Si se deja vacío, funciona en modo simulación y guarda en localStorage.
+       ============================================================ */
+    const GOOGLE_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz06PxQQyjaSPGDuNJc3flroCP-A4oD9qN6AuNInYRf-qbXbes2ZVk1OizKGDnVvS0M/exec'; 
+
+    // Estado del selector de estrellas
+    let currentScore = 5;
+    const ratingLabels = {
+      1: '⭐ Pésima / Muy insatisfecho',
+      2: '⭐⭐ Regular / Podría mejorar bastante',
+      3: '⭐⭐⭐ Buena / Aceptable',
+      4: '⭐⭐⭐⭐ Muy buena / Satisfecho',
+      5: '⭐⭐⭐⭐⭐ ¡Excelente, me encanta!'
+    };
+
+    function previewStars(score) {
+      updateStarsVisual(score);
+      const label = document.getElementById('rating-label');
+      if (label) label.textContent = ratingLabels[score] || '';
+    }
+
+    function selectStars(score) {
+      currentScore = score;
+      document.getElementById('rating-score').value = score;
+      updateStarsVisual(score);
+      const label = document.getElementById('rating-label');
+      if (label) label.textContent = ratingLabels[score] || '';
+    }
+
+    function resetStarHover() {
+      updateStarsVisual(currentScore);
+      const label = document.getElementById('rating-label');
+      if (label) label.textContent = ratingLabels[currentScore] || '';
+    }
+
+    function updateStarsVisual(score) {
+      const buttons = document.querySelectorAll('#stars-container .star-btn');
+      buttons.forEach(btn => {
+        const btnScore = parseInt(btn.getAttribute('data-score'), 10);
+        if (btnScore <= score) {
+          btn.classList.add('text-brand');
+          btn.classList.remove('text-gray-600');
+        } else {
+          btn.classList.remove('text-brand');
+          btn.classList.add('text-gray-600');
+        }
+      });
+    }
+
+    function toggleAnonymous(checkbox) {
+      const nameInput = document.getElementById('athlete-name');
+      if (checkbox.checked) {
+        nameInput.value = 'Anónimo';
+        nameInput.disabled = true;
+        nameInput.classList.add('opacity-50');
+      } else {
+        nameInput.value = '';
+        nameInput.disabled = false;
+        nameInput.classList.remove('opacity-50');
+      }
+    }
+
+    // Inicializar estrellas al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      selectStars(5);
+    });
+
+    // Envío del Formulario
+    async function handleSurveySubmit(event) {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnIcon = document.getElementById('btn-icon');
+      const btnSpinner = document.getElementById('btn-spinner');
+
+      // Feedback visual de envío
+      submitBtn.disabled = true;
+      btnText.textContent = 'Enviando...';
+      btnIcon.classList.add('hidden');
+      btnSpinner.classList.remove('hidden');
+
+      const form = document.getElementById('seiken-survey-form');
+      const formData = new FormData(form);
+
+      const payload = {
+        fecha: new Date().toLocaleString('es-BO', { timeZone: 'America/La_Paz' }),
+        nombre: formData.get('nombre') || 'Anónimo',
+        tiempo_box: formData.get('tiempo_box') || 'No especificado',
+        coach_frecuente: formData.get('coach_frecuente') || 'Varios',
+        calificacion_general: parseInt(formData.get('calificacion_general'), 10) || currentScore,
+        area_coaches: formData.get('area_coaches') || 'Excelente',
+        area_limpieza: formData.get('area_limpieza') || 'Excelente',
+        area_ambiente: formData.get('area_ambiente') || 'Excelente',
+        lo_mejor: formData.get('lo_mejor') || '',
+        sugerencia_mejora: formData.get('sugerencia_mejora') || ''
+      };
+
+      try {
+        if (GOOGLE_SHEETS_WEBHOOK_URL && GOOGLE_SHEETS_WEBHOOK_URL.trim() !== '') {
+          // Envío real a Google Apps Script
+          await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Requerido por Google Apps Script redirects
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          // Modo Local / Simulación para pruebas
+          console.log('[Seiken Survey] Respuesta guardada localmente:', payload);
+          const history = JSON.parse(localStorage.getItem('seiken_survey_responses') || '[]');
+          history.push(payload);
+          localStorage.setItem('seiken_survey_responses', JSON.stringify(history));
+          // Pequeña pausa para simular red
+          await new Promise(r => setTimeout(r, 600));
+        }
+
+        // Transición de éxito con Review Gating
+        const surveyCard = document.getElementById('survey-card');
+        surveyCard.classList.add('hidden');
+
+        if (payload.calificacion_general >= 4) {
+          // Calificación positiva -> pantalla Google Maps
+          document.getElementById('result-success-high').classList.remove('hidden');
+        } else {
+          // Calificación baja -> pantalla privada con WhatsApp
+          document.getElementById('result-success-low').classList.remove('hidden');
+        }
+
+        // Scroll suave al inicio
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (err) {
+        console.error('Error al enviar encuesta:', err);
+        alert('Hubo un problema de conexión al enviar tus respuestas. Por favor intenta de nuevo.');
+        submitBtn.disabled = false;
+        btnText.textContent = 'Enviar Evaluación';
+        btnIcon.classList.remove('hidden');
+        btnSpinner.classList.add('hidden');
+      }
+    }
+  </script>
+
+</body>
+</html>

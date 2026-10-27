@@ -2,5 +2,3 @@
 # Sirve el CMS admin panel sin activar el SPA fallback de index.html
 /admin /admin/index.html 200
 /admin/ /admin/index.html 200
-/encuesta /encuesta.html 200
-/encuesta/ /encuesta.html 200
